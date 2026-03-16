@@ -1,0 +1,648 @@
+
+SET DE EXERCIȚII – PROMPTING PENTRU FITNESS (10 exerciții)
+================================================================
+
+INSTRUCȚIUNI OBLIGATORII (pentru TOATE exercițiile):
+Fiecare prompt scris de student TREBUIE să conțină explicit:
+1. INSTRUCȚIUNI clare și specifice pentru modelul llm
+2. CONTEXT (situația utilizatorului, constrângeri)
+3. FORMAT DE IEȘIRE clar (structură, bullet points, pași etc.)
+
+Domeniu: FITNESS
+Limbaj: LIMBA ROMÂNĂ
+Nu se scrie cod, doar PROMPTURI.
+
+----------------------------------------------------------------
+1. ZERO-SHOT PROMPTING
+----------------------------------------------------------------
+Scrie un prompt zero-shot pentru generarea unui plan de antrenament de forță
+pentru un adult sănătos, respectând TOATE instrucțiunile obligatorii.
+
+Prompt:
+Ești un expert în antrenamente de forță și programare sportivă. 
+
+CONTEXT: Utilizatorul este un adult sănătos de 35 de ani, cu experiență intermediară în sala de forță (antrenamente regulate de 1-2 ani), care se poate antrena 3 zile pe săptămână, fără limitări medicale sau fizice. Obiectivul este creșterea masei musculare și a forței generale.
+
+SARCINĂ: Creează un plan de antrenament de forță pentru 4 săptămâni, care să includă exerciții compuse și auxiliare, cu volum progresiv.
+
+FORMAT DE IEȘIRE:
+- Structură pe săptămâni (Săptămâna 1, 2, 3, 4)
+- Pentru fiecare săptămână: 3 zile de antrenament (Luni, Miercuri, Vineri)
+- Pentru fiecare zi: listă de exerciții cu seturi, repetări și timp de pauză
+- Recomandări de încălzire (5-10 minute) și stretching final (5 minute)
+- Notă privind progresia sarcinilor (ex: +2.5 kg la exercițiile compuse din săptămâna în săptămână)
+
+
+----------------------------------------------------------------
+2. ZERO-SHOT PROMPTING + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt zero-shot în care modelul este personificat ca
+„antrenor personal certificat”, respectând structura cerută
+entru un antrenament de forță.
+
+Prompt:
+Ești un antrenor personal certificat NASM (National Academy of Sports Medicine) cu 10 ani de experiență în sălile de fitness.
+
+CONTEXT: Clientul tău este o femeie de 28 de ani, începătoare în antrenamentele de forță, care dorește să înceapă un program de tonifiere musculară. Se poate antrena 3 zile pe săptămână, câte 60 de minute per sesiune. Nu are probleme de sănătate, dar are un istoric de ușoară durere la genunchi după alergat.
+
+SARCINĂ: Creează un plan de antrenament de forță pe 6 săptămâni, adaptat nivelului de începător, cu accent pe tehnica corectă și progresie lentă, evitând impactul excesiv asupra genunchilor.
+
+FORMAT DE IEȘIRE:
+- Structură clară pe săptămâni (1-6)
+- 3 zile de antrenament pe săptămână
+- Pentru fiecare zi: exerciții (nume, descriere scurtă), seturi, repetări, tempo (ex: 3-1-1), pauze
+- Alternativă pentru exercițiile ce solicită mult genunchii (ex: genuflexiuni înlocuite cu presa picior)
+- Sfaturi tehnice pentru fiecare exercițiu cheie
+- Planul de progresie: când și cum se crește sarcina (greutate, repetări sau volum)
+
+
+----------------------------------------------------------------
+3. FEW-SHOT PROMPTING
+----------------------------------------------------------------
+Creează un prompt care include 2 exemple (întrebare + răspuns),
+apoi cere modelului să răspundă la o a treia întrebare,
+folosind context și format de ieșire explicit (contextul: fitness).
+
+Prompt:
+Ești un specialist în nutriție sportivă și planificare de antrenamente.
+
+CONTEXT: Utilizatorii vin cu întrebări specifice despre combinarea antrenamentelor cu alimentația. Iată două exemple de interacțiuni anterioare:
+
+**Exemplul 1:**
+Întrebare: "Mă antrenez dimineața la 7:00, ce ar trebui să mănânc înainte?"
+Răspuns: "Pentru antrenamentul matinal, consumă un mic dejun ușor cu 45-60 minute înainte: banană + o lingură de unt de arahide + cafea. Acest combo oferă carbohidrați rapizi și grăsimi sănătoase pentru energie susținută, fără să te apese la stomac."
+
+**Exemplul 2:**
+Întrebare: "Vreau să slăbesc, dar și să câștig masă musculară. E posibil?"
+Răspuns: "Da, dar cu mențiunea că e mai dificil simultan. Recomandarea: deficit caloric moderat (300-500 kcal sub necesar), aport proteic ridicat (1.8-2.2g/kg corp), antrenament de forță 3-4x/săptămână + cardio moderat 2x/săptămână. Așteptări realiste: pierdere de grăsime vizibilă în 8-12 săptămâni, cu menținere sau creștere minoră de masă musculară."
+
+Acum răspunde la această întrebare:
+
+Întrebare: "Mă antrenez seara după serviciu, la 19:00. Ce ar trebui să mănânc la prânz și după antrenament pentru a nu îngrășa, dar să am energie?"
+
+FORMAT DE IEȘIRE:
+- Răspuns structurat pe două secțiuni: "Masa de prânz (13:00-14:00)" și "Masa post-antrenament (20:30-21:00)"
+- Pentru fiecare masă: exemple concrete de alimente, cantități estimate și macronutrienți aproximativi (proteine, carbohidrați, grăsimi)
+- Explicație scurtă (2-3 propoziții) de ce funcționează acest timing și compoziție
+
+
+----------------------------------------------------------------
+4. CHAIN OF THOUGHT
+----------------------------------------------------------------
+Scrie un prompt care cere modelului să gândească pas cu pas
+pentru a construi un plan de slăbire, cu format explicit.
+
+Prompt:
+Ești un consultant în fitness și nutriție pentru pierdere în greutate.
+
+CONTEXT: Un utilizator de 40 de ani, greutate actuală 95 kg, înălțime 175 cm, stil de viață sedentar (birou 8h/zi), fără antrenamente regulate în ultimii 3 ani, dorește să slăbească 12 kg în 4 luni într-un mod sănătos și sustenabil.
+
+SARCINĂ: Construiește un plan de slăbire detaliat, gândind pas cu pas, explicând fiecare decizie luată.
+
+FORMAT DE IEȘIRE:
+
+**PAS 1 – ANALIZA SITUAȚIEI INIȚIALE:**
+- Calculează IMC-ul actual
+- Estimează metabolismul bazal (BMR) și necesarul caloric zilnic total (TDEE) cu nivel de activitate sedentar
+- Identifică principalele provocări (ex: lipsa obișnuinței cu sportul, posibile probleme cu genunchii din cauza greutății)
+
+**PAS 2 – STABILIREA OBIECTIVULUI REALIST:**
+- Verifică dacă ținta de 12 kg în 4 luni este sigură (ritm recomandat de pierdere: 0.5-1 kg/săptămână)
+- Calculează deficitul caloric necesar zilnic pentru atingerea obiectivului
+
+**PAS 3 – PLANUL DE ALIMENTAȚIE:**
+- Propune un deficit caloric zilnic (ex: TDEE - 500 kcal)
+- Distribuie macronutrienții (proteine, carbohidrați, grăsimi) pe ziua alimentară
+- Sugerează 3-4 mese pe zi cu exemple concrete
+
+**PAS 4 – PLANUL DE ANTRENAMENT:**
+- Săptămânile 1-2: adaptare (mers pe jos 30 min/zi, mobilitate)
+- Săptămânile 3-6: introducere antrenament de rezistență (full-body 2x/săptămână) + cardio moderat (3x/săptămână)
+- Săptămânile 7-16: intensificare progresivă (forță 3x/săptămână + HIIT 1-2x/săptămână)
+
+**PAS 5 – MONITORIZARE ȘI AJUSTĂRI:**
+- Cum se măsoară progresul (cântar, circumferințe, poze)
+- Când și cum se ajustează caloriile sau antrenamentul dacă progresul se oprește
+
+Explică raționamentul pentru fiecare pas în 2-3 propoziții.
+
+
+----------------------------------------------------------------
+5. CHAIN OF THOUGHT + PERSONIFICARE
+----------------------------------------------------------------
+Formulează un prompt în care modelul este personificat ca
+„specialist în fiziologia efortului” și explică raționamentul.
+
+Prompt:
+Ești un specialist în fiziologia efortului cu doctorat în științe ale sportului, care lucrează cu atleți de performanță și clienți obișnuiți.
+
+CONTEXT: Un client de 32 de ani, alergător amator (participă la semimaratoane), vrea să treacă la primul maraton peste 5 luni. Până acum alerga 30-40 km pe săptămână, dar simte că are nevoie de un plan structurat pentru a nu se accidenta și a performa.
+
+SARCINĂ: Construiește un plan de pregătire pentru maraton (42.195 km), explicând fiecare decizie bazată pe principiile fiziologice ale antrenamentului de anduranță.
+
+FORMAT DE IEȘIRE:
+
+**ETAPA 1 – EVALUARE INIȚIALĂ ȘI STABILIRE OBIECTIV:**
+- Analizează volumul actual de alergare și experiența clientului
+- Stabilește un obiectiv de timp realist pentru maraton (ex: sub 4 ore)
+- Explică raționamentul fiziologic: de ce 5 luni este suficient/insuficient, ce adaptări trebuie să apară (creșterea capacității aerobe, eficiență neuromusculară, adaptare metabolică)
+
+**ETAPA 2 – STRUCTURA PLANULUI PE 20 DE SĂPTĂMÂNI:**
+- **Faza 1 (Săptămânile 1-8): Construcție bază aerobă**
+  - Volum: creștere progresivă de la 40 km la 65 km pe săptămână
+  - Tipuri de alergări: easy runs (80%), tempo runs (15%), long runs (5%)
+  - Explicație fiziologică: creșterea densității mitocondriale, îmbunătățirea livrării de oxigen la mușchi
+  
+- **Faza 2 (Săptămânile 9-16): Intensificare specifică**
+  - Introducerea intervalelor lungi și alergărilor la ritm de maraton
+  - Long run-uri progresive până la 32-35 km
+  - Explicație: obișnuirea corpului cu efortul de durată la intensitate de maraton, depleție glicogen și adaptare metabolică
+  
+- **Faza 3 (Săptămânile 17-19): Peak și taper**
+  - Săptămâna 17: volum maxim (peak week ~70-75 km)
+  - Săptămânile 18-19: reducere progresivă (taper) la 50%, apoi 30% din volumul maxim
+  - Explicație: permiterea super-compensării și acumulării de glicogen, recuperare neuromusculară
+
+- **Săptămâna 20: Săptămâna maratonului**
+  - Volum minim, alergări foarte ușoare
+  - Explicație: menținerea formei fără oboseală acumulată
+
+**ETAPA 3 – CONSIDERAȚII SUPLIMENTARE:**
+- Necesarul de forță complementară (2x/săptămână exerciții pentru core și stabilizare)
+- Nutriție: strategii de glycogen loading în ultimele 3 zile pre-maraton
+- Prevenirea accidentărilor: semne de overtraining, când să iei zile de odihnă
+
+Fiecare secțiune să conțină explicația raționamentului fiziologic în 3-4 propoziții clare.
+
+
+----------------------------------------------------------------
+6. TREE OF THOUGHT
+----------------------------------------------------------------
+Creează un prompt care cere explorarea a minimum 3 soluții diferite
+pentru un plan de antrenament și alegerea celei mai bune, cu justificare.
+
+Prompt:
+Ești un consultant fitness cu experiență în personalizarea programelor de antrenament.
+
+CONTEXT: Un client de 45 de ani, bărbat, 85 kg, 178 cm, nivel intermediar, dorește să-și îmbunătățească forța și masa musculară. Poate antrena 4 zile pe săptămână, dispune de echipament complet (bară, gantere, aparate). Întrebarea lui: "Ce split de antrenament ar fi cel mai eficient pentru mine: full-body, upper/lower sau push/pull/legs?"
+
+SARCINĂ: Explorează minimum 3 soluții diferite pentru structura de antrenament (split), analizează avantajele și dezavantajele fiecăreia și alege varianta optimă, cu justificare clară.
+
+FORMAT DE IEȘIRE:
+
+**SOLUȚIA 1: FULL-BODY (4x/săptămână)**
+- Structură: luni, marți, joi, vineri – tot corpul în fiecare sesiune
+- Avantaje:
+  - Frecvență ridicată de stimulare a fiecărui grup muscular (4x/săptămână)
+  - Flexibilitate: dacă lipsește o zi, tot antrenează toate grupele
+  - Ideal pentru maximizarea sintezei proteice
+- Dezavantaje:
+  - Sesiuni mai lungi (75-90 min)
+  - Risc de overtraining dacă volumul nu e gestionat corect
+  - Oboseală acumulată – ultimele exerciții pot suferi
+- Verdict: **7/10** (bun pentru forță, dar sesiuni lungi)
+
+**SOLUȚIA 2: UPPER/LOWER (4x/săptămână)**
+- Structură: luni (upper), marți (lower), joi (upper), vineri (lower)
+- Avantaje:
+  - Echilibru între volum și recuperare
+  - Sesiuni de 60-75 minute, mai ușor de susținut
+  - Fiecare grup muscular antrenat 2x/săptămână (frecvență optimă pentru hipertrofie)
+- Dezavantaje:
+  - Mai puțină flexibilitate: dacă lipsește o zi upper, pierde un întreg antrenament pentru partea superioară
+  - Necesită planificare atentă pentru a nu supraîncărca lower body (multe grupuri mari)
+- Verdict: **9/10** (cel mai echilibrat pentru intermediari)
+
+**SOLUȚIA 3: PUSH/PULL/LEGS (4x/săptămână)**
+- Structură: luni (push), marți (pull), joi (legs), vineri (push sau pull, rotație)
+- Avantaje:
+  - Specializare pe grupuri musculare specifice
+  - Recuperare excelentă (fiecare grup antrenat o dată la 4-5 zile)
+  - Sesiuni scurte (50-65 minute), focusate
+- Dezavantaje:
+  - Frecvență scăzută de stimulare (doar 1-1.5x/săptămână per grup)
+  - Pentru hipertrofie optimă, ar fi nevoie de 5-6 zile/săptămână (clientul are doar 4)
+  - Risc de dezechilibru dacă rotația nu e bine gestionată
+- Verdict: **6/10** (suboptimal pentru 4 zile, mai bun pentru 6 zile)
+
+**CONCLUZIE FINALĂ:**
+- **Alegere optimă: Upper/Lower (Soluția 2)**
+- **Justificare:**
+  - Clientul are 4 zile disponibile → Upper/Lower permite 2 sesiuni upper, 2 lower = frecvență ideală de 2x/săptămână per grup (conform studiilor de hipertrofie, frecvența 2x/săptămână > 1x/săptămână)
+  - Sesiuni de durată medie (60-75 min) sustenabile pe termen lung
+  - Echilibru optim între volum, intensitate și recuperare pentru nivelul intermediar
+  - Flexibilitate rezonabilă: dacă lipsește o zi, măcar jumătate din corp e antrenat
+
+
+----------------------------------------------------------------
+7. TREE OF THOUGHT + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt în care modelul este personificat ca
+„consultant fitness” ce creaza un plan săptămânal și compară strategii diferite.
+
+Prompt:
+Ești un consultant fitness specializat în optimizarea performanței și gestionarea timpului pentru profesioniști ocupați.
+
+CONTEXT: Un client de 38 de ani, femeie, profesionist în IT cu program full-time (9-18), mamă a doi copii, poate antrena doar 3 zile pe săptămână (luni, miercuri, vineri) câte 45 de minute, acasă cu echipament minim (set gantere reglabile 2-15 kg, bandă elastică, covoraș). Obiectiv: menținere greutate, tonifiere, creștere energie.
+
+SARCINĂ: Creează un plan săptămânal de antrenament, explorând 3 strategii diferite de organizare a celor 3 sesiuni, și alege varianta optimă pentru situația ei.
+
+FORMAT DE IEȘIRE:
+
+**STRATEGIE 1: FULL-BODY (3x/săptămână)**
+- **Structură:** Luni, miercuri, vineri – antrenament complet pentru tot corpul în fiecare sesiune
+- **Exemplu de exerciții:**
+  - Genuflexiuni cu gantere (picioare, fesieri)
+  - Prese cu gantere la piept (piept, triceps)
+  - Rânduri cu gantere (spate, biceps)
+  - Presa deasupra capului (umeri)
+  - Planșa (core)
+  - Bandă elastică pentru abductori (fesieri medii)
+- **Avantaje:**
+  - Fiecare grup muscular lucrat 3x/săptămână (frecvență maximă)
+  - Flexibilitate: dacă lipsește o zi, tot antrenează tot corpul celelalte 2 zile
+  - Sesiuni echilibrate, fără focus pe anumite zone
+- **Dezavantaje:**
+  - Doar 6-7 exerciții per sesiune (45 min limit) → volum limitat per grup muscular
+  - Risc de oboseală rapidă dacă nu e gestionată corect pauza între serii
+- **Verdict:** **8/10** – excelent pentru menținere și tonifiere generală
+
+**STRATEGIE 2: UPPER/LOWER + FULL-BODY (3x/săptămână)**
+- **Structură:**
+  - Luni: Upper body (piept, spate, umeri, brațe)
+  - Miercuri: Lower body (picioare, fesieri, core)
+  - Vineri: Full-body (exerciții compuse, circuite)
+- **Exemplu:**
+  - Luni: 8 exerciții upper (presă piept, rânduri, ridicări laterale, curl biceps, extensii triceps, planșă laterală)
+  - Miercuri: 8 exerciții lower (genuflexiuni, deadlift românesc cu gantere, lunges, fire hydrants, extensii gambă cu bandă)
+  - Vineri: 6 exerciții compuse în circuit (burpees modificate, goblet squat, rânduri cu gantere, overhead press, plank mountain climbers)
+- **Avantaje:**
+  - Mai mult volum pentru fiecare grup (concentrare pe zone specifice)
+  - Ziua de vineri (full-body) acționează ca „reset" și arde calorii suplimentare
+  - Recuperare bună între sesiuni (upper nu afectează lower)
+- **Dezavantaje:**
+  - Dacă lipsește ziua de upper sau lower, acea zonă rămâne neantrenată toată săptămâna
+  - Necesită mai multă planificare
+- **Verdict:** **7/10** – bun pentru variație, dar mai puțin flexibil
+
+**STRATEGIE 3: HIIT + FORȚĂ FUNCȚIONALĂ (3x/săptămână)**
+- **Structură:**
+  - Luni: HIIT cardio + core (20 min HIIT cu greutatea corpului, 25 min core și mobilitate)
+  - Miercuri: Forță lower body (genuflexiuni, lunges, deadlift românesc, bandă pentru fesieri)
+  - Vineri: Forță upper body + HIIT finisher (presă piept, rânduri, umeri, 10 min HIIT finalizare)
+- **Avantaje:**
+  - Componenta HIIT crește metabolismul și arde grăsime eficient
+  - Variație mare (nu devine plictisitor)
+  - Sesiuni dinamice, energizante
+- **Dezavantaje:**
+  - Volum de forță mai mic (doar 1 sesiune full per zonă/săptămână)
+  - HIIT poate fi epuizant pentru cineva cu nivel de oboseală profesională ridicat
+  - Nu maximizează tonifierea musculară (accent mai mult pe cardio)
+- **Verdict:** **6/10** – bun pentru energie și pierdere de grăsime, mai puțin pentru tonifiere
+
+**DECIZIE FINALĂ:**
+- **Strategia aleasă: FULL-BODY (Strategie 1)**
+- **Justificare:**
+  - Clientul are timp limitat (45 min) și 3 zile/săptămână → full-body asigură că tot corpul e antrenat chiar dacă lipsește o sesiune (important pentru un program ocupat)
+  - Obiectivele sunt menținere + tonifiere + energie, NU performanță maximă → frecvență de 3x/săptămână per grup muscular e ideală pentru aceste scopuri
+  - Sesiuni echilibrate, mai puțin stresante mental (nu trebuie să aleagă între upper/lower, doar intră și face antrenamentul)
+  - Risc scăzut de burnout (volum moderat, varietate în exerciții)
+  
+**PLAN CONCRET PENTRU SĂPTĂMÂNA TIPICĂ (Full-Body):**
+- **Luni:** Genuflexiuni goblet, presă piept cu gantere, rânduri, overhead press, planșă, abducție fesieri cu bandă (6 exerciții x 3 serii)
+- **Miercuri:** Deadlift românesc, presă înclinată, rânduri un braț, lunges, curl biceps, extensii triceps (6 exerciții x 3 serii)
+- **Vineri:** Circuit de 5 exerciții compuse (burpees modificate, goblet squat, rânduri, overhead press, mountain climbers) – 4 runde, 40s muncă / 20s pauză
+
+Durata: 42-48 minute per sesiune, perfect pentru programul clientei.
+
+
+----------------------------------------------------------------
+8. PROMPT CHAINING
+----------------------------------------------------------------
+Construiește un prompt cu două etape clare:
+1) analiză antrenament HIIT
+2) generare plan structurat
+
+Prompt:
+Ești un expert în fitness și programare de antrenamente.
+
+CONTEXT: Un utilizator dorește să înțeleagă și să înceapă antrenamentele HIIT (High-Intensity Interval Training) pentru a slăbi și îmbunătăți condiția fizică. Are nivel începător, 30 de ani, fără probleme de sănătate, dar nu a făcut niciodată HIIT.
+
+SARCINĂ: Realizează o interacțiune în două etape clare:
+
+---
+
+**ETAPA 1: ANALIZA ANTRENAMENTULUI HIIT**
+
+Explică următoarele aspecte despre HIIT:
+
+1. **Ce este HIIT:**
+   - Definiție: antrenament în intervale de intensitate înaltă alternând cu perioade de recuperare
+   - Durata tipică a unui antrenament HIIT (15-30 minute)
+   - Raportul muncă:odihnă (ex: 30s efort maxim, 30s recuperare)
+
+2. **Beneficii pentru slăbit și condiție fizică:**
+   - Arderea caloriilor în timpul și DUPĂ antrenament (EPOC – excess post-exercise oxygen consumption)
+   - Îmbunătățirea capacității cardiovasculare rapid
+   - Creșterea metabolismului bazal
+   - Eficiență de timp (rezultate în sesiuni scurte)
+
+3. **Precauții pentru începători:**
+   - Risc de accidentare dacă forma tehnică nu e corectă
+   - Necesitatea unui nivel minim de condiție fizică (test: poți alerga/merge rapid 10 minute fără oprire?)
+   - Importanța încălzirii (5-10 minute obligatoriu)
+   - Frecvența recomandată: 2-3x/săptămână, NU zilnic (risc de overtraining)
+
+4. **Semne că ești gata pentru HIIT:**
+   - Poți face 20 de genuflexiuni corect
+   - Poți ține planșa 30 de secunde
+   - Nu ai amețeli sau dureri în piept la efort moderat
+
+FORMAT PENTRU ETAPA 1:
+- Text structurat pe cele 4 puncte de mai sus
+- Bullet points pentru fiecare beneficiu/precauție
+- Un avertisment final: "Dacă nu îndeplinești criteriile din punctul 4, începe cu cardio moderat (mers rapid, bicicletă) timp de 2-4 săptămâni înainte de HIIT."
+
+---
+
+**ETAPA 2: GENERARE PLAN HIIT STRUCTURAT PENTRU ÎNCEPĂTORI**
+
+Pe baza analizei din Etapa 1, creează un plan concret de 4 săptămâni pentru introducerea HIIT:
+
+**SĂPTĂMÂNA 1-2: ADAPTARE (2 sesiuni/săptămână)**
+- **Structură:** 20 minute total (5 min încălzire, 12 min HIIT, 3 min răcire)
+- **Protocol:** 20 secunde efort (60-70% capacitate maximă), 40 secunde recuperare activă (mers pe loc)
+- **Exerciții:** jumping jacks modificate (fără sărituri), march in place cu ridicare genunchi, genuflexiuni lente, shadow boxing
+- **Total intervale:** 12 runde
+
+**SĂPTĂMÂNA 3-4: INTENSIFICARE (3 sesiuni/săptămână)**
+- **Structură:** 25 minute total (5 min încălzire, 16 min HIIT, 4 min răcire + stretching)
+- **Protocol:** 30 secunde efort (75-80% capacitate), 30 secunde recuperare activă
+- **Exerciții:** jumping jacks completi, high knees, burpees modificate (fără push-up), mountain climbers, squat jumps
+- **Total intervale:** 16 runde
+
+**NOTĂ IMPORTANTĂ:**
+- Monitorizează pulsul: în timpul intervalelor intense, trebuie să ajungi la 80-85% din frecvența cardiacă maximă (formula: 220 - vârstă)
+- Dacă simți amețeală, dureri în piept sau respirație extrem de dificilă → OPREȘTE imediat
+- Hidratare: 500 ml apă înainte, mici înghițituri în timpul pauzelor, 500 ml după
+- Nutriție: nu face HIIT pe stomacul gol; consumă un mic dejun/snack ușor cu 1-2 ore înainte
+
+FORMAT PENTRU ETAPA 2:
+- Structură clară pe săptămâni
+- Pentru fiecare săptămână: durata, protocol (raport muncă:odihnă), exerciții concrete, număr de intervale
+- Secțiunea "Notă importantă" cu recomandări de siguranță
+
+
+----------------------------------------------------------------
+9. REACT (Reason + Act) + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt în care modelul explică raționamentul (Reason)
+și propune acțiuni concrete (Act), într-un format clar
+pentru un antrenament săptămânal.
+
+Prompt:
+Ești un antrenor personal experimentat care lucrează într-o sală de fitness premium și ai abordare analitică, bazată pe științe ale sportului.
+
+CONTEXT: Un nou client de 42 de ani, bărbat, 92 kg, 180 cm, manager în corporație, sedentarism prelungit (5 ani fără sport), se înscrie la sală. Obiectiv: "Vreau să încep să fac sport pentru sănătate, dar nu știu de unde să încep. Am auzit că ar trebui să fac și cardio, și forță, dar nu înțeleg cum să le combin."
+
+SARCINĂ: Răspunde clientului explicând RAȚIONAMENTUL tău (de ce anumite decizii sunt luate, pe baza ce principii) și apoi propune ACȚIUNI CONCRETE (plan exact ce trebuie să facă).
+
+FORMAT DE IEȘIRE:
+
+---
+
+**REASON (RAȚIONAMENTUL MEU CA ANTRENOR):**
+
+**1. Evaluarea situației:**
+- IMC curent: 92 kg / (1.80)² = 28.4 → supraponderal, aproape de obezitate (IMC 30+)
+- Sedentarism 5 ani → risc: sistem cardiovascular decondiționat, musculatură slabă, posibile dureri articulare (genunchi, spate) din cauza greutății și lipsei mișcării
+- Vârstă 42 ani → metabolism mai lent decât la 25 ani, dar recuperare încă bună dacă programul e adaptat corect
+- Manager corporație → probabil stress ridicat, somn posibil afectat, alimentație neregulată
+
+**2. Prioritizarea obiectivelor:**
+De ce SĂNĂTATE e mai important decât ESTETICĂ în primele 8-12 săptămâni:
+- Sistemul cardiovascular trebuie recondiționat treptat (risc de incident cardiac dacă începe cu intensitate prea mare)
+- Articulațiile și ligamentele au nevoie de timp să se adapteze la solicitări (risc de accidentare: entorse, tendinite)
+- Formarea obișnuinței e mai importantă decât rezultatele rapide (studiile arată că 66 de zile = durata medie pentru formarea unui obicei)
+
+**3. Combinarea cardio + forță:**
+De ce AMBELE sunt necesare:
+- **Cardio:** îmbunătățește funcția inimii, crește capacitatea pulmonară, arde calorii în timpul efortului → esențial pentru pierdere în greutate și sănătate cardiovasculară
+- **Forță:** crește masa musculară, crește metabolismul bazal (mușchii ard calorii chiar în repaus), îmbunătățește postura și previne durerile de spate, întărește oasele → esențial pentru funcționalitate pe termen lung
+
+De ce NU trebuie făcute simultan la intensitate maximă:
+- Corpul decondiționat nu poate recupera eficient dacă e suprasolicitat
+- Risc de burnout (fizic și mental) → abandon în săptămânile 4-6
+- Progresie inteligentă: primele 4 săptămâni = adaptare, apoi intensificare treptată
+
+---
+
+**ACT (ACȚIUNILE CONCRETE PENTRU CLIENT):**
+
+**PLANUL DE ANTRENAMENT PE 12 SĂPTĂMÂNI:**
+
+**FAZA 1: ADAPTARE (Săptămânile 1-4)**
+
+**Obiectiv:** Reconditionarea corpului, formare obicei, învățarea tehnicii corecte
+
+**Frecvență:** 3 zile/săptămână (ex: Luni, Miercuri, Vineri)
+
+**Structură fiecărei sesiuni (60 minute):**
+1. **Încălzire:** 10 minute
+   - 5 min mers pe banda de alergat, viteză 5-6 km/h, înclinație 0%
+   - 5 min mobilizări articulare (rotații umeri, rotații șolduri, extensii genunchi)
+
+2. **Antrenament de forță – FULL BODY (30 minute):**
+   - Genuflexiuni cu greutatea corpului (sau ținindu-se de un cadru dacă e dificil) – 3 serii x 10 repetări
+   - Presă piept la aparat (mașină ghidată, ușor de controlat) – 3 x 12
+   - Rânduri la aparat orizontal (spate) – 3 x 12
+   - Presă umeri la aparat – 3 x 10
+   - Planșa (core) – 3 x 20 secunde
+   - **Pauze:** 90 secunde între serii
+   - **Sarcină:** greutăți ușoare/moderate (să poată face toate repetările corect, ultimele 2 repetări să fie puțin dificile, dar nu imposibile)
+
+3. **Cardio moderat (15 minute):**
+   - Bicicletă staționară sau eliptică (mai puțin impact pe genunchi decât alergatul)
+   - Intensitate: 60-65% din frecvența cardiacă maximă (formula: 220 - 42 ani = 178 bpm → țintă 107-115 bpm)
+   - Trebuie să poată vorbi în timpul efortului (testul vorbirii)
+
+4. **Răcire și stretching (5 minute):**
+   - Mers ușor 2 minute
+   - Stretching static pentru toate grupele musculare lucrate (30 secunde per grup)
+
+**Monitorizare Faza 1:**
+- Cântar: 1x/săptămână, dimineața, pe stomacul gol
+- Energie și dispoziție: notează zilnic pe scală 1-10
+- Dureri neobișnuite: dacă apar dureri articulare persistente > 2 zile → reduce intensitatea sau consultă medic
+
+---
+
+**FAZA 2: INTENSIFICARE (Săptămânile 5-8)**
+
+**Obiectiv:** Creșterea forței, îmbunătățirea capacității cardiovasculare, accelerarea pierderii în greutate
+
+**Frecvență:** 4 zile/săptămână (Luni, Marți, Joi, Sâmbătă)
+
+**Structură:**
+- **Luni + Joi:** Antrenament FORȚĂ (full-body) – 40 minute + cardio moderat 15 minute
+  - Aceleași exerciții ca în Faza 1, dar:
+    - Creștere sarcină cu 10-15% (dacă în Faza 1 făcea presă piept cu 20 kg, acum 22-23 kg)
+    - Adăugare 1 serie (de la 3 la 4 serii per exercițiu)
+    - Reducere pauze la 60 secunde
+  
+- **Marți + Sâmbătă:** CARDIO intermediar – 30 minute
+  - Interval training ușor pe bicicletă/eliptică:
+    - 5 min încălzire (intensitate joasă)
+    - 20 min intervale: 2 minute la intensitate moderată (65-70% FCmax), 1 minut la intensitate ușor mai mare (75% FCmax)
+    - 5 min răcire
+  
+**Monitorizare Faza 2:**
+- Cântar + circumferință talie: 1x/săptămână
+- Progres la greutăți: notează sarcinile la fiecare exercițiu
+- Țintă realistă: pierdere 0.5-1 kg/săptămână
+
+---
+
+**FAZA 3: CONSOLIDARE (Săptămânile 9-12)**
+
+**Obiectiv:** Automatizare obicei, rezultate vizibile, pregătire pentru program de performanță (dacă dorește)
+
+**Frecvență:** 4-5 zile/săptămână
+
+**Structură:**
+- **Luni + Joi:** Upper body (piept, spate, umeri, brațe) – 45 min + 10 min cardio
+- **Miercuri + Sâmbătă:** Lower body (picioare, fesieri, core) – 45 min + 10 min cardio
+- **Marți (opțional):** Cardio lung, intensitate moderată – 35-40 minute, constant
+
+**Monitorizare Faza 3:**
+- Evaluare finală (săptămâna 12):
+  - Greutate corporală (țintă: -4 până la -6 kg față de start)
+  - Circumferință talie (țintă: -5 până la -8 cm)
+  - Test condiție fizică: câte minute poate alerga/merge rapid fără oprire (țintă: minim 20 min continuu)
+  - Forță: verificare progres la exercițiile de bază (țintă: +30-40% la sarcini față de săptămâna 1)
+
+---
+
+**RECOMANDĂRI COMPLEMENTARE (ESENȚIALE PENTRU SUCCES):**
+
+1. **Nutriție:**
+   - Deficit caloric moderat: -300 până la -500 kcal/zi față de necesarul actual
+   - Distribuție macronutrienți: 30% proteine, 40% carbohidrați, 30% grăsimi
+   - 3 mese principale + 1-2 snack-uri
+   - Hidratare: minim 2.5 litri apă/zi
+
+2. **Somn:**
+   - Țintă: 7-8 ore/noapte
+   - Programul de antrenament funcționează optimal doar cu somn adecvat (recuperare musculară, reglare hormoni)
+
+3. **Monitorizare progres:**
+   - Poze săptămânale (față, profil, spate) – schimbările vizuale apar după săptămâna 6-8
+   - Nu te descuraja dacă greutatea stagnează temporar (posibil câștig de masă musculară compensează pierderea de grăsime)
+
+4. **Mentalitate:**
+   - Primele 2-3 săptămâni vor fi dificile (oboseală, dureri musculare delayed onset
+
+
+----------------------------------------------------------------
+10. MULTIMODAL PROMPTING + PERSONIFICARE
+----------------------------------------------------------------
+Formulează un prompt în care modelul este personificat ca
+„antrenor într-o sală de fitness”, primește o imagine
+și recomandă exerciții pe baza ei.
+
+Prompt:
+Ești un antrenor personal într-o sală de fitness modernă, cu experiență în evaluarea posturii și recomandarea exercițiilor personalizate pe baza analizei vizuale.
+
+CONTEXT: Un client îți trimite o imagine cu echipamentul pe care îl are disponibil acasă sau cu pozițiile sale în timpul unui exercițiu (ex: genuflexiune, planșă, alergare pe loc). Rolul tău este să analizezi imaginea și să oferi feedback specific și recomandări de exerciții.
+
+SARCINĂ: Primești o imagine (IMAGINE ATAȘATĂ) și trebuie să:
+
+1. **ANALIZEAZĂ IMAGINEA:**
+   - Identifică echipamentul vizibil (gantere, bandă elastică, bară, minge medicinală, benches etc.) SAU
+   - Evaluează poziția corpului (dacă e imagine cu exercițiu în execuție): alinierea coloanei, poziția genunchilor, extensia brațelor, activarea core-ului, posibile erori tehnice
+
+2. **FEEDBACK SPECIFIC:**
+   - Dacă e echipament: descrie posibilitățile de antrenament pe baza echipamentului vizibil
+   - Dacă e exercițiu în execuție: oferă corectări tehnice precise ("genunchiul stâng depășește vârful piciorului, risc de accidentare – trage șoldurile mai în spate")
+
+3. **RECOMANDĂRI DE EXERCIȚII PERSONALIZATE:**
+   - Pe baza echipamentului sau nivelului tehnic observat, propune 5-6 exerciții concrete
+   - Pentru fiecare exercițiu: nume, grupuri musculare vizate, seturi, repetări, puncte cheie de tehnică
+
+FORMAT DE IEȘIRE:
+
+---
+
+**ANALIZA IMAGINII:**
+
+[Descrie CE vezi în imagine: echipament specific, poziție corporală, spațiu disponibil, indicii despre nivel de experiență]
+
+Exemple:
+- "Văd un set de gantere reglabile (pare 2-20 kg), o bancă înclinabilă, o bandă elastică lungă și un covoraș de yoga. Spațiul pare să fie ~3x3 metri, suficient pentru majoritatea exercițiilor acasă."
+- "Văd clientul executând o genuflexiune: poziția genunchilor corectă, dar spatele este rotunjit în zona lombară, semn de mobilitate redusă la șolduri sau core slab."
+
+---
+
+**FEEDBACK SPECIFIC:**
+
+**Puncte forte observate:**
+- [Liste ce este executat corect sau ce echipament de calitate există]
+
+**Puncte de îmbunătățit:**
+- [Liste probleme tehnice, limitări de echipament sau sugestii de achiziție]
+
+Exemplu (pentru echipament):
+- Puncte forte: gantere reglabile excelente pentru progresie, bancă înclinabilă permite variante multiple de exerciții
+- Puncte de îmbunătățit: lipsește o bară de tracțiuni (recomand achiziționarea unei bare de ușă, ~80-150 lei) pentru a antrena mai eficient spatele și bicepsul
+
+Exemplu (pentru exercițiu în execuție):
+- Puncte forte: genunchii aliniați corect cu vârfurile picioarelor, coborâre controlată
+- Puncte de îmbunătățit: spate rotunjit → activează abdomenul (trage buricul spre coloană), privește un punct fix la 2 metri în față (nu în jos), imaginează că tragi șoldurile înapoi ca și cum te-ai așeza pe un scaun invizibil
+
+---
+
+**PLAN DE EXERCIȚII RECOMANDATE:**
+
+[Pe baza echipamentului sau nivelului observat]
+
+**Exercițiul 1: [Nume exercițiu]**
+- **Grupuri musculare:** [ex: picioare, fesieri, core]
+- **Execuție:** [descriere pas cu pas]
+- **Doză:** [seturi x repetări, ex: 4 x 12]
+- **Puncte cheie:** [1-2 indicații tehnice esențiale]
+
+**Exercițiul 2: [Nume exercițiu]**
+- **Grupuri musculare:** [ex: piept, triceps, umeri]
+- **Execuție:** [descriere pas cu pas]
+- **Doză:** [seturi x repetări]
+- **Puncte cheie:** [indicații tehnice]
+
+[... continui până la Exercițiul 5-6]
+
+---
+
+**PLAN SĂPTĂMÂNAL STRUCTURAT (pe baza echipamentului/nivelului observat):**
+
+**Luni: [Tipul de antrenament]**
+- Exercițiile 1, 2, 4 (ordinea optimă pentru această zi)
+- Durată estimată: [ex: 40-45 minute]
+
+**Miercuri: [Tipul de antrenament]**
+- Exercițiile 3, 5, 6
+- Durată estimată: [ex: 35-40 minute]
+
+**Vineri: [Tipul de antrenament]**
+- Circuit cu toate exercițiile (3 runde complete)
+- Durată estimată: [ex: 30-35 minute]
+
+---
+
+**RECOMANDĂRI FINALE:**
+
+- [Sfat personalizat bazat pe analiza imaginii: ex: "Investește în oglindă pentru a-ți verifica tehnica" sau "Filmează-te din profil la genuflexiuni pentru a observa alinierea spatelui"]
+- [Avertisment de siguranță dacă e cazul: ex: "Dacă durerea la genunchi persistă, consultă un medic înainte de a continua genuflexiunile"]
+- [Motivare: "Echipamentul tău este suficient pentru antrenamente excelente acasă – consistența e mai importantă decât echipamentul!"]
+
+---
+
+**NOTĂ:** Când primești imaginea, analizează-o atent și adaptează răspunsul la ce vezi concret. Dacă imaginea nu e clară sau lipsesc informații, cere clarificări (ex: "Nu văd clar greutățile ganterelor – ce range de kg ai disponibil?").
