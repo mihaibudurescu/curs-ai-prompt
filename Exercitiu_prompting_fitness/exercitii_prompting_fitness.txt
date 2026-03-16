@@ -1,0 +1,165 @@
+
+SET DE EXERCIȚII – PROMPTING PENTRU FITNESS (10 exerciții)
+================================================================
+
+INSTRUCȚIUNI OBLIGATORII (pentru TOATE exercițiile):
+Fiecare prompt scris de student TREBUIE să conțină explicit:
+1. INSTRUCȚIUNI clare și specifice pentru modelul llm
+2. CONTEXT (situația utilizatorului, constrângeri)
+3. FORMAT DE IEȘIRE clar (structură, bullet points, pași etc.)
+
+Domeniu: FITNESS
+Limbaj: LIMBA ROMÂNĂ
+Nu se scrie cod, doar PROMPTURI.
+
+----------------------------------------------------------------
+1. ZERO-SHOT PROMPTING
+----------------------------------------------------------------
+Scrie un prompt zero-shot pentru generarea unui plan de antrenament de forță
+pentru un adult sănătos, respectând TOATE instrucțiunile obligatorii.
+
+Prompt: Descrie-mi un antrenament de forta care sa cuprinda pasii pentru dezvoltare musculara.
+Utilizatorul este un barbat de 30 de ani care este sensibil la lactoza.
+Outputul sa fie impartit pe bullet points.
+
+
+----------------------------------------------------------------
+2. ZERO-SHOT PROMPTING + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt zero-shot în care modelul este personificat ca
+„antrenor personal certificat”, respectând structura cerută
+entru un antrenament de forță.
+
+Prompt: Esti un antrenor de fitness cu 10 ani experienta.
+Descrie-mi un antrenament de forta care sa cuprinda pasii pentru dezvoltare musculara.
+Utilizatorul este un barbat de 30 de ani care este sensibil la lactoza.
+Outputul sa fie impartit pe bullet points.
+
+
+----------------------------------------------------------------
+3. FEW-SHOT PROMPTING
+----------------------------------------------------------------
+Creează un prompt care include 2 exemple (întrebare + răspuns),
+apoi cere modelului să răspundă la o a treia întrebare,
+folosind context și format de ieșire explicit (contextul: fitness).
+
+Prompt: Esti un antrenor fitness experimentat. Iata doua exemple de antrenamente pentru incepatori:
+
+Exemplu 1:
+Intrebare: Creeaza un antrenament simplu pentru forta.
+Raspuns:
+- Genuflexiuni: 3 seturi de 10 repetari
+- Impins din culcat: 3 seturi de 10 repetari
+- Tractiuni: 3 seturi de 8 repetari
+
+Exemplu 2:
+Intrebare: Creeaza un antrenament simplu pentru cardio.
+Raspuns:
+- Alergare usoara: 20 minute
+- Sarituri cu coarda: 3 seturi de 1 minut
+- Bicicleta stationara: 15 minute
+
+Acum, folosind acelasi format, creeaza un antrenament pentru cineva care vrea sa piarda in greutate.
+
+Context: Utilizatorul este o femeie de 25 de ani, incepatoare in fitness, cu disponibilitate de 30 minute pe zi.
+
+Format de iesire: Bullet points pentru fiecare exercitiu, cu seturi si repetari.
+
+
+----------------------------------------------------------------
+4. CHAIN OF THOUGHT
+----------------------------------------------------------------
+Scrie un prompt care cere modelului să gândească pas cu pas
+pentru a construi un plan de slăbire, cu format explicit.
+
+Prompt: Gandeste pas cu pas pentru a crea un plan de slabire personalizat.
+
+Context: Utilizatorul este un barbat de 35 de ani, vrea sa slabeasca 10 kg in 3 luni, are acces la sala de fitness si urmeaza o dieta echilibrata.
+
+Format de iesire: Pasi numerotati, cu explicatii detaliate pentru fiecare pas, inclusiv exercitii, dieta si monitorizare.
+
+
+----------------------------------------------------------------
+5. CHAIN OF THOUGHT + PERSONIFICARE
+----------------------------------------------------------------
+Formulează un prompt în care modelul este personificat ca
+„specialist în fiziologia efortului” și explică raționamentul.
+
+Prompt: Esti un specialist in fiziologia efortului cu 15 ani de experienta. Gandeste pas cu pas pentru a explica cum functioneaza metabolismul in timpul exercitiilor cardio si cum poate fi optimizat pentru slabire.
+
+Context: Utilizatorul este un student la sport care vrea sa inteleaga mecanismele biologice.
+
+Format de iesire: Pasi numerotati, fiecare cu o explicatie stiintifica clara si exemple practice.
+
+
+----------------------------------------------------------------
+6. TREE OF THOUGHT
+----------------------------------------------------------------
+Creează un prompt care cere explorarea a minimum 3 soluții diferite
+pentru un plan de antrenament și alegerea celei mai bune, cu justificare.
+
+Prompt: Exploreaza minimum 3 solutii diferite pentru un plan de antrenament de forta pentru incepatori, apoi alege cea mai buna cu justificare detaliata.
+
+Context: Utilizatorul este un tanar de 20 de ani, fara experienta anterioara in fitness, cu acces la echipamente de baza.
+
+Format de iesire: - Solutie 1: Descriere completa\n- Solutie 2: ...\n- Solutie 3: ...\n- Alegerea: [numarul], cu motive pentru fiecare aspect.
+
+
+----------------------------------------------------------------
+7. TREE OF THOUGHT + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt în care modelul este personificat ca
+„consultant fitness” ce creaza un plan săptămânal și compară strategii diferite.
+
+Prompt: Esti un consultant fitness cu expertiza in antrenamente personalizate. Creeaza un plan saptamanal de antrenament comparand 3 strategii diferite: full body, split upper/lower, push/pull/legs, si alege cea mai potrivita cu justificare detaliata.
+
+Context: Utilizatorul este o femeie de 30 de ani, nivel intermediar, vrea sa construiasca masa musculara si are 5 zile disponibile pe saptamana.
+
+Format de iesire: - Strategie 1: Descriere plan saptamanal\n- Strategie 2: ...\n- Strategie 3: ...\n- Comparatie: Tabel sau bullet points\n- Alegerea: [strategia], motive.
+
+
+----------------------------------------------------------------
+8. PROMPT CHAINING
+----------------------------------------------------------------
+Construiește un prompt cu două etape clare:
+1) analiză antrenament HIIT
+2) generare plan structurat
+
+Prompt: Etapa 1: Analizeaza beneficiile si riscurile antrenamentelor HIIT pentru slabire.
+
+Etapa 2: Pe baza analizei din etapa 1, genereaza un plan structurat de antrenament HIIT pentru 4 saptamani.
+
+Context: Utilizatorul este un barbat de 28 de ani, activ fizic, vrea sa integreze HIIT in rutina sa pentru a accelera slabirea.
+
+Format de iesire: Etapa 1: Lista de beneficii si riscuri in bullet points. Etapa 2: Plan saptamanal cu zile, exercitii specifice, durata fiecarei sesiuni si pauze.
+
+
+----------------------------------------------------------------
+9. REACT (Reason + Act) + PERSONIFICARE
+----------------------------------------------------------------
+Scrie un prompt în care modelul explică raționamentul (Reason)
+și propune acțiuni concrete (Act), într-un format clar
+pentru un antrenament săptămânal.
+
+Prompt: Esti un antrenor fitness experimentat. Reason: Explica rationamentul pentru crearea unui antrenament saptamanal echilibrat care include cardio, forta si flexibilitate pentru sanatate generala.
+
+Act: Propune actiuni concrete pentru fiecare zi a saptamanii, cu exercitii specifice.
+
+Context: Utilizatorul este o persoana ocupata, cu doar 45 minute pe zi disponibile pentru antrenament.
+
+Format de iesire: Reason: Un paragraf explicativ. Act: Lista numerotata pentru fiecare zi din saptamana, cu exercitii si durata.
+
+
+----------------------------------------------------------------
+10. MULTIMODAL PROMPTING + PERSONIFICARE
+----------------------------------------------------------------
+Formulează un prompt în care modelul este personificat ca
+„antrenor într-o sală de fitness”, primește o imagine
+și recomandă exerciții pe baza ei.
+
+Prompt: Esti un antrenor intr-o sala de fitness cu 10 ani experienta. Primesti o imagine a unei persoane care face genuflexiuni incorect: genunchii sunt prea in fata, riscand accidentare la genunchi. Recomanda exercitii corective si sfaturi pentru a imbunatati forma.
+
+Context: Utilizatorul este incepator in fitness si vrea sa invete forma corecta pentru a evita accidentarile.
+
+Format de iesire: - Exercitii alternative: Lista\n- Sfaturi pentru forma corecta: Bullet points cu explicatii.
+
