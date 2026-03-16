@@ -1,0 +1,11 @@
+main.py
+   ↓
+runner.py
+   ↓
+Python code is analyzed
+   ↓
+The pipeline starts
+   ↓
+Groq analyzes code
+   ↓
+Email with resolution sent
