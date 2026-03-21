@@ -14,7 +14,7 @@
 ```powershell
 python -m venv venv
 .\venv\Scripts\activate
-pip install -r requirements.txt
+pip install -r '.\Lectia3\Tema2\requirements.txt' 
 ```
 
 - Redenumiți fișierul .env.sample în .env și completați variabilele cu valorile dvs.

@@ -2,7 +2,7 @@ import json
 import os
 import hashlib
 
-from dotenv import load_dotenv
+from dotenv import load_dotenv, find_dotenv
 import numpy as np
 import tensorflow_hub as hub
 import tensorflow as tf
@@ -11,7 +11,7 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from openai import OpenAI
 import faiss
 
-load_dotenv()
+load_dotenv(find_dotenv())
 
 DATA_DIR = os.environ.get("DATA_DIR", "/app/data")
 CHUNKS_JSON_PATH = os.path.join(DATA_DIR, "data_chunks.json")
@@ -29,13 +29,13 @@ class RAGAssistant:
 
     def __init__(self) -> None:
         """Initializeaza clientul LLM, embedderul si prompturile."""
-        self.groq_api_key = os.environ.get("GROQ_API_KEY")
-        if not self.groq_api_key:
-            raise ValueError("Seteaza GROQ_API_KEY in variabilele de mediu.")
+        self.openai_api_key = os.environ.get("OPENAI_API_KEY")
+        if not self.openai_api_key:
+            raise ValueError("Seteaza OPENAI_API_KEY in variabilele de mediu.")
 
         self.client = OpenAI(
-            api_key=self.groq_api_key,
-            base_url=os.environ.get("GROQ_BASE_URL"))
+            api_key=self.openai_api_key
+        )
 
         os.makedirs(DATA_DIR, exist_ok=True)
         self.embedder = None
@@ -102,7 +102,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="openai/gpt-oss-20b",
+                model="gpt-4o-mini",
             )
             return response.choices[0].message.content
         except Exception:
