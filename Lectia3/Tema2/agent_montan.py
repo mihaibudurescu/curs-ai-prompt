@@ -42,12 +42,17 @@ class RAGAssistant:
 
         # ToDo: Adaugat o propozitie de referinta mai specifica pentru domeniul dvs
         self.relevance = self._embed_texts(
-            "Aceasta este o intrebare relevanta despre ...",
+            "Aceasta este o intrebare despre turism montan in Romania, trasee, cabane, varfuri sau activitati in muntii romanesti.",
         )[0]
 
         # ToDo: Definiti un prompt de sistem mai detaliat pentru a ghida raspunsurile LLM-ului in directia dorita
         self.system_prompt = (
-            "..."
+            "Esti un asistent specializat in turismul montan din Romania. "
+            "Raspunzi doar la intrebari despre muntii romanesti, trasee turistice, cabane, varfuri, "
+            "activitati montane, echipament necesar si sfaturi de siguranta in munte. "
+            "Foloseste informatiile din contextul furnizat. Daca nu gasesti informatia in context, "
+            "spune ca nu ai date suficiente despre acel subiect. "
+            "Raspunde intotdeauna in limba romana, clar si concis."
         )
 
 
@@ -94,7 +99,8 @@ class RAGAssistant:
             {
                 "role": "user",
                 "content": (
-                    "..."
+                    f"Folosind urmatorul context despre turismul montan din Romania:\n\n{context}\n\n"
+                    f"Raspunde la urmatoarea intrebare: {user_input}"
                 ),
             },
         ]
@@ -229,12 +235,14 @@ class RAGAssistant:
         """Directioneaza mesajul utilizatorului catre calea potrivita."""
         if not user_message:
             # ToDo: Ajustati acest mesaj pentru a fi mai specific pentru domeniul dvs, astfel incat sa ghideze utilizatorii sa puna intrebari relevante si sa ofere un exemplu concret.
-            return "Te rog scrie un mesaj despre ... ."
+            return "Te rog scrie o intrebare despre turismul montan din Romania. Exemplu: 'Care sunt cele mai frumoase trasee din Bucegi?'"
 
         if not self.is_relevant(user_message):
             # ToDo: Ajustati acest mesaj pentru a fi mai specific pentru domeniul dvs, astfel incat sa ghideze utilizatorii sa puna intrebari relevante si sa ofere un exemplu concret.
             return (
-                "..."
+                "Intrebarea ta nu pare a fi despre turismul montan din Romania. "
+                "Te rog intreaba despre trasee, cabane, varfuri sau activitati in muntii romanesti. "
+                "Exemplu: 'Ce echipament am nevoie pentru Fagaras?'"
             )
 
         chunks = self._load_documents_from_web()
@@ -245,5 +253,5 @@ class RAGAssistant:
 if __name__ == "__main__":
     assistant = RAGAssistant()
     # ToDo: Testati cu intrebari relevante pentru domeniul dvs, precum si cu intrebari irelevante pentru a va asigura ca logica de filtrare functioneaza corect.
-    print(assistant.assistant_response("..."))  # test relevant
-    print(assistant.assistant_response("..."))  # test irelevant
+    print(assistant.assistant_response("Care sunt cele mai populare trasee din Bucegi?"))  # test relevant
+    print(assistant.assistant_response("Care este reteta de sarmale?"))  # test irelevant
