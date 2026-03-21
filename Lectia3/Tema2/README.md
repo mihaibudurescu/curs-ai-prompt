@@ -6,5 +6,7 @@ Construiți un asistent care să răspundă la informații relevante doar pentru
 
 ## Indicații
 
-https://github.com/dragosbajenaru1001/Teme_pentru_acasa/tree/main/src/tema_2_services
+Rezolvati cerintele To-Do din fisierul https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/src/tema_2_services/service.py
+
+
 
