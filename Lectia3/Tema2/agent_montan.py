@@ -17,6 +17,7 @@ DATA_DIR = os.environ.get("DATA_DIR", "/app/data")
 CHUNKS_JSON_PATH = os.path.join(DATA_DIR, "data_chunks.json")
 FAISS_INDEX_PATH = os.path.join(DATA_DIR, "faiss.index")
 FAISS_META_PATH = os.path.join(DATA_DIR, "faiss.index.meta")
+TRASEE_JSON_PATH = os.path.join(DATA_DIR, "trasee.json")
 USE_MODEL_URL = os.environ.get(
     "USE_MODEL_URL",
     "https://tfhub.dev/google/universal-sentence-encoder/4",
@@ -51,6 +52,8 @@ class RAGAssistant:
             "Esti un asistent specializat in turismul montan din Romania. "
             "Raspunzi doar la intrebari despre muntii romanesti, trasee turistice, cabane, varfuri, "
             "activitati montane, echipament necesar si sfaturi de siguranta in munte. "
+            "Cand listezi trasee sau circuite, include intotdeauna pentru fiecare: "
+            "numele traseului, localitatea de start, dificultatea, durata si link-ul sursa (sursa_url). "
             "Foloseste informatiile din contextul furnizat. Daca nu gasesti informatia in context, "
             "spune ca nu ai date suficiente despre acel subiect. "
             "Raspunde intotdeauna in limba romana, clar si concis."
@@ -71,19 +74,65 @@ class RAGAssistant:
         all_chunks = []
         for url in WEB_URLS:
             try:
+                print(f"[DEBUG] Loading {url} ...")
                 loader = WebBaseLoader(url)
                 docs = loader.load()
+                print(f"[DEBUG] Got {len(docs)} doc(s) from {url}")
                 for doc in docs:
+                    print(f"[DEBUG] Doc content length: {len(doc.page_content)} chars")
                     chunks = self._chunk_text(doc.page_content)
+                    print(f"[DEBUG] Chunks produced: {len(chunks)}")
                     all_chunks.extend(chunks)
-            except Exception:
+            except Exception as e:
+                print(f"[DEBUG] Failed to load {url}: {e}")
                 continue
+
+        print(f"[DEBUG] Total chunks from web: {len(all_chunks)}")
+
+        local_chunks = self._load_from_local_json()
+        all_chunks.extend(local_chunks)
 
         if all_chunks:
             with open(CHUNKS_JSON_PATH, "w", encoding="utf-8") as f:
                 json.dump(all_chunks, f, ensure_ascii=False)
 
         return all_chunks
+
+    def _load_from_local_json(self) -> list[str]:
+        """Incarca trasee din fisierul JSON local trasee.json."""
+        if not os.path.exists(TRASEE_JSON_PATH):
+            return []
+        try:
+            with open(TRASEE_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except (OSError, json.JSONDecodeError) as e:
+            print(f"[DEBUG] Failed to load local JSON: {e}")
+            return []
+
+        trasee = data.get("trasee", []) if isinstance(data, dict) else data
+        chunks = []
+        for t in trasee:
+            if not isinstance(t, dict):
+                continue
+            parts = []
+            if t.get("nume"):
+                parts.append(f"Traseu: {t['nume']}")
+            if t.get("localitate_start"):
+                parts.append(f"Start: {t['localitate_start']}, {t.get('judet', '')}")
+            if t.get("dificultate"):
+                parts.append(f"Dificultate: {t['dificultate']}")
+            if t.get("durata_h"):
+                parts.append(f"Durata: {t['durata_h']} ore")
+            if t.get("distanta_km"):
+                parts.append(f"Distanta: {t['distanta_km']} km")
+            if t.get("denivelare_m"):
+                parts.append(f"Denivelare: {t['denivelare_m']} m")
+            if t.get("sursa_url"):
+                parts.append(f"Sursa: {t['sursa_url']}")
+            if parts:
+                chunks.append("\n".join(parts))
+        print(f"[DEBUG] Local JSON chunks: {len(chunks)}")
+        return chunks
 
     def _send_prompt_to_llm(
         self,
@@ -101,7 +150,7 @@ class RAGAssistant:
                 "role": "user",
                 "content": (
                     f"Folosind urmatorul context despre turismul montan din Romania:\n\n{context}\n\n"
-                    f"Raspunde la urmatoarea intrebare: {user_input}"
+                    f"Raspunde la urmatoarea intrebare si include pentru fiecare traseu mentionat link-ul sursa (sursa_url): {user_input}"
                 ),
             },
         ]
@@ -109,7 +158,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="llama3-8b-8192",
+                model="llama-3.3-70b-versatile",
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -222,6 +271,50 @@ class RAGAssistant:
         _, indices = index.search(query_embedding, k=k)
         return [chunks[i] for i in indices[0] if i < len(chunks)]
 
+    def _retrieve_by_locality(self, user_query: str) -> list[str]:
+        """Cauta direct in trasee.json dupa localitate_start sau nume traseu."""
+        if not os.path.exists(TRASEE_JSON_PATH):
+            return []
+        try:
+            with open(TRASEE_JSON_PATH, "r", encoding="utf-8") as f:
+                data = json.load(f)
+        except (OSError, json.JSONDecodeError):
+            return []
+
+        trasee = data.get("trasee", []) if isinstance(data, dict) else data
+        query_lower = user_query.lower()
+        # strip punctuation and extract words (min 4 chars)
+        clean = "".join(c if c.isalpha() or c.isspace() else " " for c in query_lower)
+        keywords = [w for w in clean.split() if len(w) >= 4]
+        print(f"[DEBUG] Locality keywords: {keywords}")
+
+        matched = []
+        for t in trasee:
+            localitate = (t.get("localitate_start") or "").lower()
+            judet = (t.get("judet") or "").lower()
+            # match only against localitate_start and judet, not sursa_url or nume
+            # to avoid false positives from generic words like "montane"
+            if any(kw in localitate or kw in judet for kw in keywords):
+                parts = []
+                if t.get("nume"):
+                    parts.append(f"Traseu: {t['nume']}")
+                if t.get("localitate_start"):
+                    parts.append(f"Start: {t['localitate_start']}, {t.get('judet', '')}")
+                if t.get("dificultate"):
+                    parts.append(f"Dificultate: {t['dificultate']}")
+                if t.get("durata_h"):
+                    parts.append(f"Durata: {t['durata_h']} ore")
+                if t.get("distanta_km"):
+                    parts.append(f"Distanta: {t['distanta_km']} km")
+                if t.get("denivelare_m"):
+                    parts.append(f"Denivelare: {t['denivelare_m']} m")
+                if t.get("sursa_url"):
+                    parts.append(f"Sursa: {t['sursa_url']}")
+                if parts:
+                    matched.append("\n".join(parts))
+        print(f"[DEBUG] Locality match chunks: {len(matched)}")
+        return matched
+
     def calculate_similarity(self, text: str) -> float:
         # ToDo: Ajustati aceasta propozitie de referinta pentru a se potrivi mai bine cu domeniul dvs, astfel incat sa reflecte mai precis ce inseamna "relevant" in contextul aplicatiei dvs.
         """Returneaza similaritatea cu o propozitie de referinta despre ... ."""
@@ -248,12 +341,20 @@ class RAGAssistant:
             )
 
         chunks = self._load_documents_from_web()
-        relevant_chunks = self._retrieve_relevant_chunks(chunks, user_message)
-        context = "\n\n".join(relevant_chunks)
+        relevant_chunks = self._retrieve_relevant_chunks(chunks, user_message, k=15)
+        locality_chunks = self._retrieve_by_locality(user_message)
+        # merge, deduplicate, locality matches first
+        seen = set()
+        combined = []
+        for c in locality_chunks + relevant_chunks:
+            if c not in seen:
+                seen.add(c)
+                combined.append(c)
+        context = "\n\n".join(combined)
         return self._send_prompt_to_llm(user_message, context)
 
 if __name__ == "__main__":
     assistant = RAGAssistant()
     # ToDo: Testati cu intrebari relevante pentru domeniul dvs, precum si cu intrebari irelevante pentru a va asigura ca logica de filtrare functioneaza corect.
-    print(assistant.assistant_response("Care sunt cele mai populare trasee din Bucegi?"))  # test relevant
+    print(assistant.assistant_response("Care sunt circuitele montane posibile din localitatea Busteni?"))  # test relevant
     print(assistant.assistant_response("Care este reteta de sarmale?"))  # test irelevant
