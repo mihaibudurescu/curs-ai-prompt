@@ -1,12 +1,9 @@
-# Tema 2
+# Tema 2 - Construiți un asistent care să răspundă la informații relevante doar pentru ideea dumneavoastră.
 
-## Obiectiv
 
-Construiți un asistent care să răspundă la informații relevante doar pentru ideea dumneavoastră.
-
-## Indicații
-
-Rezolvati cerintele To-Do din fisierul https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/src/tema_2_services/service.py
+## Cerinte
+- Fork din github la repository-ul https://github.com/dragosbajenaru1001/Teme_pentru_acasa
+- Rezolvati cerintele To-Do din fisierul https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/src/tema_2_services/service.py
 
 
 
