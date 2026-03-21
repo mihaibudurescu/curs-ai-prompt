@@ -19,7 +19,11 @@ pip install -r requirements.txt
 
 - Redenumiți fișierul .env.sample în .env și completați variabilele cu valorile dvs.
 
-- Testare: python src/tema_2_services/service.py
+- Testare:
+
+```powershell
+python src/tema_2_services/service.py
+```
 
 
 
