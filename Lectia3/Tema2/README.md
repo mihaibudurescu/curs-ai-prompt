@@ -7,8 +7,15 @@
 
 
 ## Instructiuni
+- Instalati versiunea de Python 3.10.11 (https://www.python.org/downloads/release/python-31011/) - necesar o singura data
 
-- Rulați în terminal: python -m venv venv . .\venv\Scripts\activate pip install -r .\requirements.txt
+- Rulați în terminal următoarele comenzi, pe rând:
+
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
 
 - Redenumiți fișierul .env.sample în .env și completați variabilele cu valorile dvs.
 
