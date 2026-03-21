@@ -36,6 +36,20 @@ In variabila WEB_URLS puneti paginile web pe care se va antrena modelul
 WEB_URLS=https://turistmania.ro;https://sglm.ro;https://www.traseeromane.ro;https://edenhill.ro/trasee-montane/;https://www.descopera.ro/trasee-montane;https://www.salvamontromania.ro
 TF_ENABLE_ONEDNN_OPTS=0
 ```
+### 4. Rulare
+
+```powershell
+python agent_montan.py # nume_agent.py
+```
+
+> **Nota:** Prima rulare descarca si indexeaza toate URL-urile din `WEB_URLS` — poate dura cateva minute. Rulari ulterioare folosesc cache-ul din `data/`.
+
+### 5. Resetare cache (dupa modificarea WEB_URLS sau trasee.json)
+
+```powershell
+Remove-Item -Force .\data\data_chunks.json, .\data\faiss.index, .\data\faiss.index.meta -ErrorAction SilentlyContinue
+```
+
 
 # Rezolvare
 ## Asistent Montan Romania — agent_montan.py
@@ -109,21 +123,6 @@ Tema2/
 
 ---
 
-
-
-> **Nota:** Prima rulare descarca si indexeaza toate URL-urile din `WEB_URLS` — poate dura cateva minute. Rulari ulterioare folosesc cache-ul din `data/`.
-
-### 4. Rulare
-
-```powershell
-python agent_montan.py
-```
-
-### 5. Resetare cache (dupa modificarea WEB_URLS sau trasee.json)
-
-```powershell
-Remove-Item -Force .\data\data_chunks.json, .\data\faiss.index, .\data\faiss.index.meta -ErrorAction SilentlyContinue
-```
 
 ---
 
