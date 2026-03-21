@@ -29,12 +29,13 @@ class RAGAssistant:
 
     def __init__(self) -> None:
         """Initializeaza clientul LLM, embedderul si prompturile."""
-        self.openai_api_key = os.environ.get("OPENAI_API_KEY")
-        if not self.openai_api_key:
-            raise ValueError("Seteaza OPENAI_API_KEY in variabilele de mediu.")
+        self.groq_api_key = os.environ.get("GROQ_API_KEY")
+        if not self.groq_api_key:
+            raise ValueError("Seteaza GROQ_API_KEY in variabilele de mediu.")
 
         self.client = OpenAI(
-            api_key=self.openai_api_key
+            api_key=self.groq_api_key,
+            base_url="https://api.groq.com/openai/v1"
         )
 
         os.makedirs(DATA_DIR, exist_ok=True)
@@ -108,10 +109,11 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="gpt-4o-mini",
+                model="llama3-8b-8192",
             )
             return response.choices[0].message.content
-        except Exception:
+        except Exception as e:
+            print(f"[DEBUG] LLM error: {e}")
             return (
                 "Asistent: Nu pot ajunge la modelul de limbaj acum. "
                 "Te rog incearca din nou in cateva momente."
