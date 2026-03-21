@@ -1,10 +1,50 @@
-# Asistent Montan Romania — agent_montan.py
+# Tema 2 - Construiți un asistent care să răspundă la informații relevante doar pentru ideea dumneavoastră.
+
+## Cerinte
+
+- Fork din github la repository-ul https://github.com/dragosbajenaru1001/Teme_pentru_acasa
+- Rezolvati cerintele To-Do din fisierul https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/src/tema_2_services/service.py
+
+---
+
+## Instructiuni
+
+### 1. Instalati Python 3.10.11 (o singura data)
+https://www.python.org/downloads/release/python-31011/
+
+### 2. Creati si activati virtualenv
+
+```powershell
+python -m venv venv
+.\venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. Configurati variabilele de mediu
+
+Obtineti un API key gratuit Groq la: https://console.groq.com/
+
+Creati un fisier `.env` in radacina repository-ului:
+
+```
+GROQ_API_KEY=your_groq_api_key_here
+DATA_DIR=./data
+```
+In variabila WEB_URLS puneti paginile web pe care se va antrena modelul
+
+```
+WEB_URLS=https://turistmania.ro;https://sglm.ro;https://www.traseeromane.ro;https://edenhill.ro/trasee-montane/;https://www.descopera.ro/trasee-montane;https://www.salvamontromania.ro
+TF_ENABLE_ONEDNN_OPTS=0
+```
+
+# Rezolvare
+## Asistent Montan Romania — agent_montan.py
 
 Un agent RAG (Retrieval-Augmented Generation) specializat in turismul montan din Romania. Raspunde doar la intrebari relevante despre trasee, cabane, varfuri si activitati in muntii romanesti, ignorand intrebarile din afara domeniului.
 
 ---
 
-## Cum functioneaza
+### Cum functioneaza
 
 ```
 Intrebare utilizator
@@ -53,7 +93,7 @@ Intrebare utilizator
 
 ---
 
-## Structura proiectului
+### Structura proiectului
 
 ```
 Tema2/
@@ -69,38 +109,7 @@ Tema2/
 
 ---
 
-## Cerinte
 
-- Fork din github la repository-ul https://github.com/dragosbajenaru1001/Teme_pentru_acasa
-- Rezolvati cerintele To-Do din fisierul https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/src/tema_2_services/service.py
-
----
-
-## Setup
-
-### 1. Instalati Python 3.10.11 (o singura data)
-https://www.python.org/downloads/release/python-31011/
-
-### 2. Creati si activati virtualenv
-
-```powershell
-python -m venv venv
-.\venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Configurati variabilele de mediu
-
-Creati un fisier `.env` in radacina repository-ului:
-
-```
-GROQ_API_KEY=your_groq_api_key_here
-DATA_DIR=./data
-WEB_URLS=https://turistmania.ro;https://sglm.ro;https://www.traseeromane.ro;https://edenhill.ro/trasee-montane/;https://www.descopera.ro/trasee-montane;https://www.salvamontromania.ro
-TF_ENABLE_ONEDNN_OPTS=0
-```
-
-Obtineti un API key gratuit Groq la: https://console.groq.com/
 
 > **Nota:** Prima rulare descarca si indexeaza toate URL-urile din `WEB_URLS` — poate dura cateva minute. Rulari ulterioare folosesc cache-ul din `data/`.
 
@@ -118,7 +127,7 @@ Remove-Item -Force .\data\data_chunks.json, .\data\faiss.index, .\data\faiss.ind
 
 ---
 
-## Variabile de mediu
+### Variabile de mediu
 
 | Variabila | Descriere | Obligatorie |
 |-----------|-----------|-------------|
@@ -130,7 +139,7 @@ Remove-Item -Force .\data\data_chunks.json, .\data\faiss.index, .\data\faiss.ind
 
 ---
 
-## Exemple
+### Exemple
 
 ```
 Intrebare cu localitate:  "Care sunt circuitele montane din Busteni?"
