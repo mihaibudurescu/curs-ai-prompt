@@ -123,9 +123,6 @@ Tema2/
 
 ---
 
-
----
-
 ### Variabile de mediu
 
 | Variabila | Descriere | Obligatorie |
