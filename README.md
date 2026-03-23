@@ -9,4 +9,4 @@
   - [Tema 2 - Construiți un asistent care să răspundă la informații relevante doar pentru ideea dumneavoastră.](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia3/Tema2)
 - [Lectia4 - Workshop: Generative AI - Fitness Assistant](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia4)
 - [Lectia5 - Generative AI: FastApi, Testare, Evaluare](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia5)
-  - [Tema 3](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia5/Tema3)
+  - [Tema 3 - Construirea unor teste unitare și adăugarea de metrici relevante în evaluarea modelului](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia5/Tema3)
