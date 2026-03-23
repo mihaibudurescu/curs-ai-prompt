@@ -2,7 +2,7 @@
 
 ## Lectii
 
-- [Lectia1 - Inteligența Artificială în 2026](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia1/README.md)
+- [Lectia1 - Inteligența Artificială în 2026](https://github.com/mihaibudurescu/curs-ai-prompt/tree/main/Lectia1)
 - [Lectia2 - Generative AI: Prompt Engineering](Lectia2/README.md)
   - [Tema 1](Lectia2/Tema1/README.md)
 - [Lectia3 - Generative AI: Îmbogățire cu date externe](Lectia3/README.md)
