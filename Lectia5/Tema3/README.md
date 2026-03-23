@@ -50,13 +50,13 @@ pip install -r .\requirements.txt
 
 ### 5. Creati un fisier .env care va contine variabilele necesare pentru aplicatii
 
-### 6. Rulare aplicatiei Python
+### 6. Rularea aplicatiei Python
 
 ```powershell
 python <cale_catre_aplicatie>.py
 ```
 
-### 7. Rulare teste unitare (`test_main.py`):
+### 7. Rularea testelor unitare (`test_main.py`):
 
 Terminal 1:
 
@@ -70,7 +70,7 @@ Terminal 2:
 pytest
 ```
 
-### 8. Rulare metrici (`evaluate.py`):
+### 8. Rularea metricilor (`evaluate.py`):
 
 Terminal 1:
 
