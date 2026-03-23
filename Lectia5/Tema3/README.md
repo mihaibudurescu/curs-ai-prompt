@@ -16,14 +16,66 @@
    - [tema_3_evaluation/evaluate.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation/evaluate.py)
 
 
-## Instructiuni:
+## Instructiuni
 
-- Rulați în terminal: python -m venv venv . .\venv\Scripts\activate pip install -r .\requirements.txt
+Rulati comenzile in ordinea de mai jos.
 
-- Redenumiți fișierul .env.sample în .env și completați variabilele cu valorile dvs.
+1. Creati mediul virtual (o singura data, la nivel de repository):
 
-- Testare: python src/tema_2_services/service.py
+```powershell
+python -m venv venv
+```
 
-- Pentru a rula testele din test_main rulați: în primul terminal: uvicorn app.main:app --reload și în al doilea terminal: pytest
+2. Activati mediul virtual:
 
-- Pentru a rula metricile din evaluate rulați: în primul terminal: uvicorn app.main:app --reload și în al doilea terminal: python -m tema_3_evaluation.evaluate
+```powershell
+.\venv\Scripts\activate
+```
+
+3. Instalati dependintele din `requirements.txt`:
+
+```powershell
+pip install -r .\requirements.txt
+```
+
+4. Redenumiti `.env.sample` in `.env` si completati variabilele necesare.
+
+5. Testare rapida serviciu:
+
+```powershell
+python src/tema_2_services/service.py
+```
+
+6. Rulare teste unitare (`test_main.py`):
+
+Terminal 1:
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+Terminal 2:
+
+```powershell
+pytest
+```
+
+7. Rulare metrici (`evaluate.py`):
+
+Terminal 1:
+
+```powershell
+uvicorn app.main:app --reload
+```
+
+Terminal 2:
+
+```powershell
+python -m tema_3_evaluation.evaluate
+```
+
+## Note importante
+
+- In acest repository folosim un singur mediu virtual: `venv` din radacina proiectului.
+- Puteti avea mai multe fisiere `requirements.txt` pe subfoldere, dar pachetele se instaleaza in interpreterul activ (acelasi `venv` daca este activat).
+- Recomandat: folositi mereu `python -m pip install -r <cale_catre_requirements.txt>` ca sa evitati instalarea in alt interpreter.
