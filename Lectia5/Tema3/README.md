@@ -40,7 +40,7 @@ python -m venv venv
 ```
 
 ### 4. Instalati dependintele din `requirements.txt`:
-> **Nota:** Puteti avea mai multe fisiere `requirements.txt` pe subfoldere, deci atentie la <cale_catre_requirements.txt>, dar pachetele se instaleaza in interpreterul activ (acelasi `venv` daca este activat).
+> **Nota:** Puteti avea mai multe fisiere `requirements.txt` pe subfoldere, deci atentie la `cale_catre_requirements.txt`, desi pachetele se vor instala intr-o singura locatie (acelasi `venv` daca este activat).
 
 ```powershell
 pip install -r .\requirements.txt
