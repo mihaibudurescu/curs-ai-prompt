@@ -19,9 +19,19 @@ python -m venv venv
 .\venv\Scripts\activate
 pip install -r requirements.txt
 ```
-> **Nota:** Prima comanda creeaza folderul local `venv` in directorul curent si un nou interpretor Python in `venv\Scripts\python.exe`. Daca exista deja, puteti sari peste acest pas.
-> **Nota:** A doua comanda este necesara ca terminalul curent sa foloseasca interpreterul din `venv` (util cand aveti mai multe venv-uri) sau cand interpretorul este cel global ( din Appdata). Puteti iesi din venv cu `deactivate`.
-> **Nota:** Puteti avea mai multe fisiere `requirements.txt` pe subfoldere, deci atentie la `cale_catre_requirements.txt`, desi pachetele se vor instala intr-o singura locatie (acelasi `venv` daca este activat).
+> **Nota:** Prima comanda creeaza folderul local `venv` in directorul curent,
+> si un nou interpretor Python in `venv\Scripts\python.exe`.
+> Daca exista deja, puteti sari peste acest pas.
+>
+> **Nota:** A doua comanda este necesara ca terminalul curent
+> sa foloseasca interpreterul din `venv` (util cand aveti mai multe venv-uri),
+> sau cand interpretorul este cel global (din AppData).
+> Puteti iesi din `venv` cu `deactivate`.
+>
+> **Nota:** Puteti avea mai multe fisiere `requirements.txt` pe subfoldere,
+> deci atentie la `cale_catre_requirements.txt`.
+> Pachetele se vor instala intr-o singura locatie
+> (acelasi `venv` daca este activat).
 
 ### 3. Configurati variabilele de mediu
 
