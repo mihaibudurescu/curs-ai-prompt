@@ -20,20 +20,22 @@
 
 Rulati comenzile in ordinea de mai jos.
 
-### 1. Verificati intai ce interpretor python este activ, deoarece in locatia acestuia se vor crea resursele de mai jos
+### 1. Verificati intai ce interpreter Python este activ
+> **Nota:** La prima rulare, de obicei va fi Python-ul instalat global (de ex. din AppData). Acest pas este doar de verificare.
 
 ```powershell
 python -c "import sys; print(sys.executable)"
 ```
 
-### 2. Creati mediul virtual (o singura data, la nivel de repository):
-> **Nota:** Daca a fost creat de la lectiile anterioare puteti da skip acestui pas
+### 2. Creati mediul virtual (o singura data, la nivel de repository)
+> **Nota:** Comanda creeaza folderul local `venv` in directorul curent si un nou interpreter Python in `venv\Scripts\python.exe`. Daca exista deja, puteti sari peste acest pas.
 
 ```powershell
 python -m venv venv
 ```
 
-### 3. Activati mediul virtual:
+### 3. Activati mediul virtual
+> **Nota:** Activarea este necesara ca terminalul curent sa foloseasca interpreterul din `venv` (util cand aveti mai multe venv-uri). Puteti iesi din venv cu `deactivate`.
 
 ```powershell
 .\venv\Scripts\activate
