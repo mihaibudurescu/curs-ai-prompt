@@ -2,12 +2,7 @@
 
 Acest document explica ce contine folderul `Tema3` si cum se leaga fisierele intre ele.
 
-## Referinta si mentenanta
-
-- Fisierul de referinta pentru arhitectura temei este chiar `STRUCTURA_TEMA3.md`.
-- Cand adaugi componente noi (endpoint-uri, teste, metrici, fisiere de configurare), actualizeaza acest document si diagrama de mai jos.
-
-## Structura folderului
+## Structura 
 
 ```text
 Tema3/
@@ -20,7 +15,34 @@ Tema3/
     ├── groq_llm.py
     └── report.py
 ```
+## Diagrama actualizata (componente + cerinte)
 
+```mermaid
+flowchart TD
+  A[requirements.txt / pip install] --> B[main.py - FastAPI app]
+  B --> C[Uvicorn - server local :8000]
+  C --> D[POST /chat]
+  D --> E[RAGAssistant]
+
+  F[tests/test_main.py - pytest] --> C
+  G[evaluation/evaluate.py - DeepEval] --> C
+  G --> H[evaluation/groq_llm.py - LLM evaluator]
+  G --> I[evaluation/report.py - raport HTML]
+```
+
+## Diagrama simpla (text)
+
+```text
+main.py (FastAPI)
+   |\
+   | \__ tests/test_main.py (verifica functionalitatea API)
+   |
+   \____ evaluation/evaluate.py (masoara calitatea raspunsurilor)
+              |
+              +--> evaluation/groq_llm.py (LLM evaluator)
+              |
+              +--> evaluation/report.py (raport HTML)
+```
 ## Rolul fiecarui fisier
 
 ### `main.py`
@@ -66,34 +88,6 @@ Tema3/
 2. Raspunsurile sunt scorate de metrici `GEval` folosind modelul din `groq_llm.py`.
 3. `report.py` genereaza raport HTML cu scoruri si explicatii.
 
-## Diagrama actualizata (componente + cerinte)
-
-```mermaid
-flowchart TD
-  A[requirements.txt / pip install] --> B[main.py - FastAPI app]
-  B --> C[Uvicorn - server local :8000]
-  C --> D[POST /chat]
-  D --> E[RAGAssistant]
-
-  F[tests/test_main.py - pytest] --> C
-  G[evaluation/evaluate.py - DeepEval] --> C
-  G --> H[evaluation/groq_llm.py - LLM evaluator]
-  G --> I[evaluation/report.py - raport HTML]
-```
-
-## Diagrama simpla (text)
-
-```text
-main.py (FastAPI)
-   |\
-   | \__ tests/test_main.py (verifica functionalitatea API)
-   |
-   \____ evaluation/evaluate.py (masoara calitatea raspunsurilor)
-              |
-              +--> evaluation/groq_llm.py (LLM evaluator)
-              |
-              +--> evaluation/report.py (raport HTML)
-```
 
 ## Cum rulezi, pe scurt
 

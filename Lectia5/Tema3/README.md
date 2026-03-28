@@ -11,13 +11,13 @@
 
 ## Resurse
 
-Putem folosi ca resurse urmatoarele fisiere din repo-ul de teme:
-   - [tema_3_tests/test_main.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests/test_main.py)
-   - [tema_3_evaluation/evaluate.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation/evaluate.py)
+Putem folosi ca resurse continutul folderelor de mai jos din repo-ul de teme:
+   - [tema_3_tests](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests)
+   - [tema_3_evaluation](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation)
 
 ## Structura temei
 
 Pentru organizarea folderelor, rolul fiecarui fisier si diagrama componentelor,
 consulta documentul dedicat:
 
-- [STRUCTURA_TEMA3.md](STRUCTURA_TEMA3.md)
+- [Plan_rezolvare.md](Lectia5\Tema3\Plan_rezolvare.md)
