@@ -114,7 +114,7 @@ Captura ta din `/docs` confirma corect expunerea endpoint-urilor `GET /` si `POS
 
 ### Teste
 ```powershell
-pytest
+pytest -vv
 ```
 
 ### Evaluare
