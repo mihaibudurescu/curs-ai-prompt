@@ -48,6 +48,7 @@ USE_MODEL_URL = os.environ.get(
     "USE_MODEL_URL",
     "https://tfhub.dev/google/universal-sentence-encoder/4",
 )
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
 
 WEB_URLS = [u for u in os.environ.get("WEB_URLS", "").split(";") if u]
 
@@ -445,7 +446,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="llama-3.3-70b-versatile",
+                model=GROQ_MODEL,
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -796,7 +797,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="llama-3.3-70b-versatile",
+                model=GROQ_MODEL,
             )
             return response.choices[0].message.content
         except Exception as e:
