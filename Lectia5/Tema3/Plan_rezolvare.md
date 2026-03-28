@@ -112,6 +112,24 @@ C:\Users\mihai\Documents\Repos\Curs AI\Lectia5\Tema3\requirements.txt
 python -m uvicorn --app-dir .\Lectia5\Tema3 main:app --reload --port 8000
 ```
 
+### Testare din FastAPI Docs (/docs)
+
+1. Deschide in browser: `http://127.0.0.1:8000/docs`.
+2. Verifica faptul ca apar endpoint-urile:
+   - `GET /` (Root)
+   - `POST /chat/` (Chat)
+3. Pentru `POST /chat/`, apasa `Try it out` si trimite un payload JSON de forma:
+
+```json
+{
+  "message": "Ce trasee usoare recomanzi in Busteni?"
+}
+```
+
+4. Raspunsul asteptat este un JSON cu cheia `response`.
+
+Captura ta din `/docs` confirma corect expunerea endpoint-urilor `GET /` si `POST /chat/`.
+
 ### Teste
 ```powershell
 pytest
