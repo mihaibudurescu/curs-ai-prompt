@@ -417,8 +417,27 @@ class RAGAssistant:
 
         system_msg = self.system_prompt
 
+        equipment_intent = self._is_equipment_intent(user_input)
+        zone_slug = self._is_zone_query(user_input)
         activity_intent = self._is_activity_intent(user_input)
-        if activity_intent:
+        if equipment_intent:
+            user_task = (
+                "Raspunde strict despre echipament montan intr-o structura in 3 sectiuni: "
+                "(1) Echipament esential, "
+                "(2) Echipament recomandat in functie de sezon/vreme, "
+                "(3) Siguranta si greseli de evitat. "
+                "Nu transforma raspunsul intr-o lista de trasee daca utilizatorul nu cere explicit trasee. "
+                "Include obligatoriu recomandari prudente: verificarea prognozei, anuntarea traseului unei persoane apropiate, "
+                "hidratare suficienta, baterie telefon + harta/GPS offline, frontala si mini-trusa medicala. "
+                "Daca datele din context nu sunt suficiente pentru un brand/model specific, ofera un ghid general sigur."
+            )
+            if zone_slug:
+                user_task += (
+                    " Adapteaza recomandarile pentru zona mentionata de utilizator: "
+                    + zone_slug.replace("-", " ")
+                    + "."
+                )
+        elif activity_intent:
             user_task = (
                 "Raspunde cu o structura in 3 sectiuni: "
                 "(1) Activitati recomandate in zona ceruta, "
@@ -627,6 +646,15 @@ class RAGAssistant:
         ]
         return any(marker in query for marker in markers)
 
+    def _is_equipment_intent(self, user_input: str) -> bool:
+        """Detecteaza intentia de recomandari despre echipament montan."""
+        query = user_input.lower()
+        markers = [
+            "echipament", "ce echipament", "ce imi trebuie", "ce trebuie sa iau",
+            "incaltaminte", "bocanci", "rucsac", "imbracaminte", "trusa"
+        ]
+        return any(marker in query for marker in markers)
+
     def _is_zone_query(self, user_input: str) -> str | None:
         """Returneaza slug-ul masivului daca intrebarea vizeaza o zona montana cunoscuta."""
         normalized = self._normalize_text_for_slug(user_input)
@@ -827,18 +855,28 @@ class RAGAssistant:
                 "Exemplu: 'Ce pot face in muntii Bucegi?'"
             )
 
+        equipment_intent = self._is_equipment_intent(user_message)
+
         # Daca intrebarea vizeaza un masiv montan cunoscut → raspuns structurat cu sursa Turistmania
         zone_slug = self._is_zone_query(user_message)
-        if zone_slug:
+        if zone_slug and not equipment_intent:
             _, zone_url = self._resolve_zone_url(zone_slug)
             if zone_url:
                 return self._zone_structured_response(zone_slug, zone_url, user_message)
 
         # Altfel: RAG general din web cache + JSON
         chunks = self._load_documents_from_web()
-        relevant_chunks = self._retrieve_relevant_chunks(chunks, user_message, k=18)
+        activity_intent = self._is_activity_intent(user_message)
+
+        relevant_k = 12 if equipment_intent else 18
+        relevant_chunks = self._retrieve_relevant_chunks(chunks, user_message, k=relevant_k)
         locality_chunks = self._retrieve_by_locality(user_message)
-        if self._is_activity_intent(user_message):
+
+        if equipment_intent:
+            # Pentru intrebari despre echipament, evitam bias-ul spre localitati/trasee.
+            locality_chunks = []
+            relevant_chunks = relevant_chunks[:10]
+        elif activity_intent:
             locality_chunks = locality_chunks[:5]
             relevant_chunks = relevant_chunks[:14]
         seen = set()
