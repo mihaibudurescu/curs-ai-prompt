@@ -21,4 +21,4 @@ Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu
 Pentru organizarea folderelor, rolul fiecarui fisier si diagrama componentelor,
 consulta documentul dedicat:
 
-- [Plan_rezolvare.md](Tema3/Plan_rezolvare.md)
+- [Plan_rezolvare.md](Plan_rezolvare.md)
