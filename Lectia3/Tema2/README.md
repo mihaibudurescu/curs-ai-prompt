@@ -33,31 +33,44 @@ pip install -r requirements.txt
 > Pachetele se vor instala intr-o singura locatie
 > (acelasi `venv` daca este activat).
 
-### 3. Configurati variabilele de mediu
+### 3. Instalati Ollama (local LLM, gratis, fara rate limits)
 
-Obtineti un API key gratuit Groq la: https://console.groq.com/
+Descarcati si instalati Ollama de la: https://ollama.ai
+
+```powershell
+# Apoi rulati Ollama in background (intr-o alta fereastra terminal)
+ollama serve
+
+# In alta fereastra, descarcati un model (una singura data)
+ollama pull mistral    # sau: llama2, neural-chat, etc.
+```
+
+### 4. Configurati variabilele de mediu
 
 Creati un fisier `.env` in radacina repository-ului:
 
 ```
-GROQ_API_KEY=your_groq_api_key_here
 DATA_DIR=./data
 ```
-In variabila WEB_URLS puneti paginile web pe care se va antrena modelul
+
+### 4. (Optionale) Configurati URL-uri web pentru scraping
+
+Daca vreti sa adaugati alte surse web, editati `.env`:
 
 ```
 WEB_URLS=https://turistmania.ro;https://sglm.ro;https://www.traseeromane.ro;https://edenhill.ro/trasee-montane/;https://www.descopera.ro/trasee-montane;https://www.salvamontromania.ro
 TF_ENABLE_ONEDNN_OPTS=0
 ```
-### 4. Rulare
+### 5. Rulare
 
 ```powershell
-python agent_montan.py # nume_agent.py
+# Asigura-te ca Ollama ruleaza in background (ollama serve in alta fereastra)
+python agent_montan.py
 ```
 
 > **Nota:** Prima rulare descarca si indexeaza toate URL-urile din `WEB_URLS` — poate dura cateva minute. Rulari ulterioare folosesc cache-ul din `data/`.
 
-### 5. Resetare cache (dupa modificarea WEB_URLS sau trasee.json)
+### 6. Resetare cache (dupa modificarea WEB_URLS sau trasee.json)
 
 ```powershell
 Remove-Item -Force .\data\data_chunks.json, .\data\faiss.index, .\data\faiss.index.meta -ErrorAction SilentlyContinue
@@ -163,13 +176,14 @@ Tema2/
 
 ### Variabile de mediu
 
-| Variabila | Descriere | Obligatorie |
-|-----------|-----------|-------------|
-| `GROQ_API_KEY` | API key pentru Groq LLM | Da |
-| `DATA_DIR` | Director pentru cache FAISS, chunks si trasee.json | Nu (default: `/app/data`) |
-| `WEB_URLS` | URL-uri separate prin `;` pentru scraping | Nu |
-| `USE_MODEL_URL` | URL model Universal Sentence Encoder | Nu (are default) |
-| `TF_ENABLE_ONEDNN_OPTS` | Dezactiveaza warning-uri TensorFlow | Nu |
+| Variabila | Descriere | Obligatorie | Note |
+|-----------|-----------|-------------|-------|
+| `DATA_DIR` | Director pentru cache FAISS, chunks si trasee.json | Nu (default: `/app/data`) | - |
+| `WEB_URLS` | URL-uri separate prin `;` pentru scraping | Nu | Setare optionala in `.env` |
+| `USE_MODEL_URL` | URL model Universal Sentence Encoder | Nu | Are default Google USE |
+| `TF_ENABLE_ONEDNN_OPTS` | Dezactiveaza warning-uri TensorFlow | Nu | Setati la 0 daca vreti sa ascundeti warning-uri |
+
+**Nota:** Nu mai aveti nevoie de `GROQ_API_KEY`. Ollama ruleaza local!
 
 ---
 
