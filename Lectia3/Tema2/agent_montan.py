@@ -79,10 +79,13 @@ class RAGAssistant:
 
     def __init__(self) -> None:
         """Initializeaza clientul LLM, embedderul si prompturile."""
-        # Ollama - trebuie sa ruleze local pe http://localhost:11434
+        self.groq_api_key = os.environ.get("GROQ_API_KEY")
+        if not self.groq_api_key:
+            raise ValueError("Seteaza GROQ_API_KEY in variabilele de mediu.")
+
         self.client = OpenAI(
-            api_key="ollama",  # dummy key pentru Ollama
-            base_url="http://localhost:11434/v1"
+            api_key=self.groq_api_key,
+            base_url="https://api.groq.com/openai/v1"
         )
 
         os.makedirs(DATA_DIR, exist_ok=True)
@@ -442,13 +445,13 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="mistral",  # sau llama2, neural-chat, etc.
+                model="llama-3.3-70b-versatile",
             )
             return response.choices[0].message.content
         except Exception as e:
             rich.print(f"[DEBUG] LLM error: {e}")
             return (
-                "Asistent: Nu pot ajunge la Ollama. Asigura-te ca Ollama ruleaza local cu 'ollama serve'. "
+                "Asistent: Nu pot ajunge la modelul de limbaj acum. "
                 "Te rog incearca din nou in cateva momente."
             )
         
@@ -793,12 +796,12 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="mistral",  # sau llama2, neural-chat, etc.
+                model="llama-3.3-70b-versatile",
             )
             return response.choices[0].message.content
         except Exception as e:
             rich.print("[DEBUG] LLM zone error: " + str(e))
-            return "Asistent: Nu pot ajunge la Ollama. Asigura-te ca 'ollama serve' ruleaza local."
+            return "Asistent: Nu pot ajunge la modelul de limbaj acum. Te rog incearca din nou."
 
     def calculate_similarity(self, text: str) -> float:
         """Returneaza similaritatea cu propozitia de referinta a domeniului montan."""
