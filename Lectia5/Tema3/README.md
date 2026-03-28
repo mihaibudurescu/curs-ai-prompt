@@ -11,7 +11,7 @@
 
 ## Resurse
 
-Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu
+Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu:
    - [main.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/app/main.py)
    - [tema_3_tests](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests)
    - [tema_3_evaluation](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation)
@@ -21,4 +21,4 @@ Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu
 Pentru organizarea folderelor, rolul fiecarui fisier si diagrama componentelor,
 consulta documentul dedicat:
 
-- [Plan_rezolvare.md](Lectia5\Tema3\Plan_rezolvare.md)
+- [Plan_rezolvare.md](Tema3/Plan_rezolvare.md)
