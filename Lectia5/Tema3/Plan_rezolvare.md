@@ -80,23 +80,6 @@ main.py (FastAPI)
 - Genereaza raport HTML pe baza scorurilor de evaluare.
 - Scrie fisierele in `evaluation/output/`.
 
-## Relatia dintre fisiere
-
-## 1) Flux aplicatie (runtime)
-1. Pornesti serverul din `main.py` cu `uvicorn`.
-2. Endpoint-ul `POST /chat/` apeleaza `RAGAssistant.assistant_response(...)`.
-3. Clientii (sau scripturile de test/evaluare) primesc raspuns JSON.
-
-## 2) Flux teste unitare
-1. `tests/test_main.py` trimite request-uri catre API-ul pornit din `main.py`.
-2. Verifica status code + continut raspuns.
-3. Semnaleaza regresii in comportamentul endpoint-urilor.
-
-## 3) Flux evaluare calitativa
-1. `evaluation/evaluate.py` trimite input-uri de evaluare catre `POST /chat/`.
-2. Raspunsurile sunt scorate de metrici `GEval` folosind modelul din `groq_llm.py`.
-3. `report.py` genereaza raport HTML cu scoruri si explicatii.
-
 ## Implementare
 
 ### Instalare dependinte (inclusiv Uvicorn)
@@ -104,7 +87,6 @@ main.py (FastAPI)
 ```powershell
 # adaugam in store-ul existent noile dependinte (FastAPI, Uvicorn, pytest, DeepEval)
 pip install -r .\Lectia5\Tema3\requirements.txt
-C:\Users\mihai\Documents\Repos\Curs AI\Lectia5\Tema3\requirements.txt
 ```
 
 ### Server API
