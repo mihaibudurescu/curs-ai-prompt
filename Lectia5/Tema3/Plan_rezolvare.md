@@ -20,6 +20,37 @@ Tema3/
     ├── groq_llm.py
     └── report.py
 ```
+## Diagrama actualizata (componente + cerinte)
+
+```mermaid
+flowchart TD
+  A[requirements.txt / pip install] --> B[main.py - FastAPI app]
+  B --> C[Uvicorn - server local :8000]
+
+  D[Request GET /] --> C
+  E[Request POST /chat] --> C
+  C --> F[Route handlers din main.py]
+  F --> G[RAGAssistant]
+
+  H[tests/test_main.py - pytest] --> C
+  I[evaluation/evaluate.py - DeepEval] --> C
+  I --> J[evaluation/groq_llm.py - LLM evaluator]
+  I --> K[evaluation/report.py - raport HTML]
+```
+
+## Diagrama simpla (text)
+
+```text
+main.py (FastAPI)
+   |\
+   | \__ tests/test_main.py (verifica functionalitatea API)
+   |
+   \____ evaluation/evaluate.py (masoara calitatea raspunsurilor)
+              |
+              +--> evaluation/groq_llm.py (LLM evaluator)
+              |
+              +--> evaluation/report.py (raport HTML)
+```
 
 ## Rolul fiecarui fisier
 
@@ -65,38 +96,6 @@ Tema3/
 1. `evaluation/evaluate.py` trimite input-uri de evaluare catre `POST /chat/`.
 2. Raspunsurile sunt scorate de metrici `GEval` folosind modelul din `groq_llm.py`.
 3. `report.py` genereaza raport HTML cu scoruri si explicatii.
-
-## Diagrama actualizata (componente + cerinte)
-
-```mermaid
-flowchart TD
-  A[requirements.txt / pip install] --> B[main.py - FastAPI app]
-  B --> C[Uvicorn - server local :8000]
-
-  D[Request GET /] --> C
-  E[Request POST /chat] --> C
-  C --> F[Route handlers din main.py]
-  F --> G[RAGAssistant]
-
-  H[tests/test_main.py - pytest] --> C
-  I[evaluation/evaluate.py - DeepEval] --> C
-  I --> J[evaluation/groq_llm.py - LLM evaluator]
-  I --> K[evaluation/report.py - raport HTML]
-```
-
-## Diagrama simpla (text)
-
-```text
-main.py (FastAPI)
-   |\
-   | \__ tests/test_main.py (verifica functionalitatea API)
-   |
-   \____ evaluation/evaluate.py (masoara calitatea raspunsurilor)
-              |
-              +--> evaluation/groq_llm.py (LLM evaluator)
-              |
-              +--> evaluation/report.py (raport HTML)
-```
 
 ## Cum rulezi, pe scurt
 
