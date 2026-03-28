@@ -77,46 +77,71 @@ Un agent RAG (Retrieval-Augmented Generation) specializat in turismul montan din
 Intrebare utilizator
         │
         ▼
-┌─────────────────────┐
-│  Verificare         │  Embeddings (Universal Sentence Encoder)
-│  relevanta          │  Similaritate cosine cu propozitia de referinta
-└────────┬────────────┘
+┌─────────────────────────────────────────────┐
+│  Verificare relevanta (2 metode)            │  
+│                                             │
+│  1. Semantica: Embeddings (USE model)       │  
+│     Similaritate cosine cu referinta        │
+│                                             │
+│  2. Lexicala: Keywords domeniu montan       │
+│     "traseu", "munte", "bucegi", etc.       │
+└────────┬────────────────────────────────────┘
          │ irelevant → raspuns de respingere
          │ relevant
          ▼
-┌──────────────────────────────────────────────────┐
-│  Incarcare date din doua surse                   │
-│                                                  │
-│  1. Web scraping (WebBaseLoader + BeautifulSoup) │
-│     URL-urile din WEB_URLS, chunked si cached    │
-│                                                  │
-│  2. JSON local (data/trasee.json)                │
-│     409 trasee cu nume, localitate, dificultate, │
-│     durata, distanta, denivelare, sursa_url      │
-└────────┬─────────────────────────────────────────┘
+┌─────────────────────────────────────────────────────┐
+│  Detectie zona montana (daca se mentioneaza)        │
+│                                                     │
+│  Daca intrebarea vizeaza o zona cunoscuta           │
+│  (Bucegi, Fagaras, Ceahlau, etc.):                  │
+│  → Incarca dinamica pagina Turistmania dedicata     │
+│  → Raspuns structurat cu date zone-specifice        │
+└────────┬────────────────────────────────────────────┘
          │
          ▼
-┌──────────────────────────────────────────────────┐
-│  Retrieval hibrid (doua strategii combinate)     │
-│                                                  │
-│  A. Exact match pe localitate_start / judet      │
-│     Cuvintele din intrebare sunt curatate de     │
-│     punctuatie si cautate direct in JSON         │
-│                                                  │
-│  B. Cautare semantica FAISS (top-15)             │
-│     IndexFlatIP cu embeddings USE, cached pe     │
-│     disc, rebuildit automat la schimbari         │
-│                                                  │
-│  Rezultatele A au prioritate, urmate de B        │
-│  (deduplicate)                                   │
-└────────┬─────────────────────────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│  Incarcare date din doua surse                       │
+│                                                      │
+│  1. Web scraping (WebBaseLoader + BeautifulSoup)     │
+│     URL-urile din WEB_URLS, chunked si cached        │
+│                                                      │
+│  2. JSON local (data/trasee.json)                    │
+│     409 trasee cu nume, localitate, dificultate,     │
+│     durata, distanta, denivelare, sursa_url          │
+└────────┬─────────────────────────────────────────────┘
          │
          ▼
-┌─────────────────────┐
-│  LLM (Groq)         │  System prompt + context + intrebare → raspuns
-│  llama-3.3-70b      │  Include sursa_url pentru fiecare traseu listat
-└─────────────────────┘
+┌──────────────────────────────────────────────────────┐
+│  Retrieval hibrid (3 strategii)                      │
+│                                                      │
+│  A. Exact match pe localitate_start / judet          │
+│     Cuvintele din intrebare cautate direct in JSON   │
+│                                                      │
+│  B. Cautare semantica FAISS (top-15)                 │
+│     IndexFlatIP cu embeddings USE, cache pe disc     │
+│                                                      │
+│  C. Zone-specific retrieval                          │
+│     Trasee relevante pentru zona detectata           │
+│                                                      │
+│  Rezultate: A + B combinate, deduplicate             │
+└────────┬─────────────────────────────────────────────┘
+         │
+         ▼
+┌──────────────────────────────────────────┐
+│  LLM (configurable)                      │  
+│                                          │  
+│  Optiuni:                                │
+│  • Ollama (local, gratis) [RECOMANDAT]   │
+│  • Groq (cloud, cu rate limit)           │
+│  • Anthropic Claude                      │
+│  • Soon: alti provideri                  │
+│                                          │
+│  System prompt + context + intrebare     │
+│  → raspuns cu surse (sursa_url)          │
+└──────────────────────────────────────────┘
 ```
+
+**Nota:** Agentul suporta acum provider-e LLM pluggable. Pentru a evita rate limitele, se recomanda **Ollama** (local, gratis, fara API keys).
 
 ---
 
