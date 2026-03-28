@@ -48,6 +48,7 @@ USE_MODEL_URL = os.environ.get(
     "USE_MODEL_URL",
     "https://tfhub.dev/google/universal-sentence-encoder/4",
 )
+GROQ_MODEL = os.environ.get("GROQ_MODEL", "llama-3.1-8b-instant")
 
 WEB_URLS = [u for u in os.environ.get("WEB_URLS", "").split(";") if u]
 
@@ -445,7 +446,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="llama-3.3-70b-versatile",
+                model=GROQ_MODEL,
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -796,7 +797,7 @@ class RAGAssistant:
         try:
             response = self.client.chat.completions.create(
                 messages=messages,
-                model="llama-3.3-70b-versatile",
+                model=GROQ_MODEL,
             )
             return response.choices[0].message.content
         except Exception as e:
@@ -823,7 +824,7 @@ class RAGAssistant:
             return (
                 "Intrebarea ta nu pare a fi despre turismul montan din Romania. "
                 "Te rog intreaba despre trasee, cabane, varfuri sau activitati in muntii romanesti. "
-                "Exemplu: 'Ce echipament am nevoie pentru Fagaras?'"
+                "Exemplu: 'Ce pot face in muntii Bucegi?'"
             )
 
         # Daca intrebarea vizeaza un masiv montan cunoscut → raspuns structurat cu sursa Turistmania
@@ -856,7 +857,7 @@ if __name__ == "__main__":
     
     rich.print("[bold green]=== Test zona structurata ===[/bold green]")
     rich.print(assistant.assistant_response("Ce activitati pot desfasura in muntii Ciucas?"))  # test zona structurata
-    rich.print(assistant.assistant_response("Ce pot face in muntii Fagaras?"))  # test zona structurata
+    rich.print(assistant.assistant_response("Ce echipament imi trebuie pentru urcat pe munte?"))  # test zona structurata
     
     rich.print("[yellow]Warning:[/yellow] Testul irelevant")
     rich.print(assistant.assistant_response("Care este reteta de sarmale?"))  # test irelevant
