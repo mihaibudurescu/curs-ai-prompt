@@ -117,7 +117,7 @@ Captura ta din `/docs` confirma corect expunerea endpoint-urilor `GET /` si `POS
 pytest -vv
 ```
 
-### Evaluare
+### Evaluare (trebuie rulat din folderul Lectia5\Tema3)
 ```powershell
 python -m evaluation.evaluate
 ```
