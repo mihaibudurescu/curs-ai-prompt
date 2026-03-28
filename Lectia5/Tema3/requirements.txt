@@ -1,0 +1,5 @@
+# adding FastAPI, Uvicorn, pytest, DeepEval
+fastapi>=0.110.0
+uvicorn>=0.29.0
+pytest>=8.0.0
+deepeval>=2.0.0
