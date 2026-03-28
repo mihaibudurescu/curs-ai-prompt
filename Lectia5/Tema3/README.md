@@ -11,7 +11,8 @@
 
 ## Resurse
 
-Putem folosi ca resurse continutul folderelor de mai jos din repo-ul de teme:
+Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu
+   - [main.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/app/main.py)
    - [tema_3_tests](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests)
    - [tema_3_evaluation](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation)
 
