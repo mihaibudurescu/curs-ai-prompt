@@ -97,19 +97,19 @@ main.py (FastAPI)
 2. Raspunsurile sunt scorate de metrici `GEval` folosind modelul din `groq_llm.py`.
 3. `report.py` genereaza raport HTML cu scoruri si explicatii.
 
-## Cum rulezi, pe scurt
+## Implementare
 
 ### Instalare dependinte (inclusiv Uvicorn)
 
 ```powershell
-pip install -r requirements.txt
+# adaugam in store-ul existent noile dependinte (FastAPI, Uvicorn, pytest, DeepEval)
+pip install -r .\Lectia5\Tema3\requirements.txt
+C:\Users\mihai\Documents\Repos\Curs AI\Lectia5\Tema3\requirements.txt
 ```
-
-Toate librariile necesare (de exemplu FastAPI, Uvicorn, pytest, DeepEval) se declara in `requirements.txt`.
 
 ### Server API
 ```powershell
-uvicorn main:app --reload --port 8000
+python -m uvicorn --app-dir .\Lectia5\Tema3 main:app --reload --port 8000
 ```
 
 ### Teste
