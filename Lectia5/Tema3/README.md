@@ -2,84 +2,40 @@
 
 ## Descriere
 
-- Implementați teste unitare pentru funcționalitatea principală a modelului.
-- Adăugați metrici relevante pentru evaluare (ex: acuratețe, precizie, recall, F1, etc.).
-- Asigurați reproducibilitate și claritatea raportului de testare.
+În această temă, extindem agentul construit în Tema 2 ([Lectia3/Tema2/agent_montan.py](../../Lectia3/Tema2/agent_montan.py)) prin:
 
-## Cerințe
+- Adăugarea de endpoint-uri API folosind frameworkul **FastAPI**;
+- Rularea endpoint-urilor FastAPI pe un server local cu **Uvicorn**;
+- Testarea endpoint-urilor modelului deployat;
+- Evaluarea modelului folosind **DeepEval** (bibliotecă folosită pentru abordarea LLM-as-a-Judge).
 
-1. Fork din repository:
-   - [Teme pentru acasă](https://github.com/dragosbajenaru1001/Teme_pentru_acasa)
+## Resurse
 
-2. Rezolvați cerințele din fișierele de referință:
-   - [tema_3_tests/test_main.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests/test_main.py)
-   - [tema_3_evaluation/evaluate.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation/evaluate.py)
+Ca resurse putem sa copiem fisierele din locatiile de mai jos in repo-ul propriu:
+   - [main.py](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/app/main.py)
+   - [tema_3_tests](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_tests)
+   - [tema_3_evaluation](https://github.com/dragosbajenaru1001/Teme_pentru_acasa/blob/main/tema_3_evaluation)
 
+## Relatia dintre fisiere
 
-## Instructiuni
+## 1) Flux aplicatie (runtime)
+1. Pornesti serverul din `main.py` cu `uvicorn`.
+2. Endpoint-ul `POST /chat/` apeleaza `RAGAssistant.assistant_response(...)`.
+3. Clientii (sau scripturile de test/evaluare) primesc raspuns JSON.
 
-Rulati comenzile in ordinea de mai jos.
+## 2) Flux teste unitare
+1. `tests/test_main.py` trimite request-uri catre API-ul pornit din `main.py`.
+2. Verifica status code + continut raspuns.
+3. Semnaleaza regresii in comportamentul endpoint-urilor.
 
-### 1. Verificati intai ce interpreter Python este activ
-> **Nota:** La prima rulare, de obicei va fi Python-ul instalat global (in AppData). Acest pas este doar de verificare.
+## 3) Flux evaluare calitativa
+1. `evaluation/evaluate.py` trimite input-uri de evaluare catre `POST /chat/`.
+2. Raspunsurile sunt scorate de metrici `GEval` folosind modelul din `groq_llm.py`.
+3. `report.py` genereaza raport HTML cu scoruri si explicatii.
 
-```powershell
-python -c "import sys; print(sys.executable)"
-```
+## Planul de rezolvare
 
-### 2. Creati mediul virtual (o singura data, la nivel de repository)
-> **Nota:** Comanda creeaza folderul local `venv` in directorul curent si un nou interpretor Python in `venv\Scripts\python.exe`. Daca exista deja, puteti sari peste acest pas.
+Pentru organizarea folderelor, rolul fiecarui fisier si diagrama componentelor,
+consulta documentul dedicat:
 
-```powershell
-python -m venv venv
-```
-
-### 3. Activati mediul virtual
-> **Nota:** Activarea este necesara ca terminalul curent sa foloseasca interpreterul din `venv` (util cand aveti mai multe venv-uri) sau cand interpretorul este cel global ( din Appdata). Puteti iesi din venv cu `deactivate`.
-
-```powershell
-.\venv\Scripts\activate
-```
-
-### 4. Instalati dependintele din `requirements.txt`:
-> **Nota:** Puteti avea mai multe fisiere `requirements.txt` pe subfoldere, deci atentie la `cale_catre_requirements.txt`, desi pachetele se vor instala intr-o singura locatie (acelasi `venv` daca este activat).
-
-```powershell
-pip install -r .\requirements.txt
-```
-
-### 5. Creati un fisier .env care va contine variabilele necesare pentru aplicatii
-
-### 6. Rularea aplicatiei Python
-
-```powershell
-python <cale_catre_aplicatie>.py
-```
-
-### 7. Rularea testelor unitare (`test_main.py`):
-
-Terminal 1:
-
-```powershell
-uvicorn app.main:app --reload
-```
-
-Terminal 2:
-
-```powershell
-pytest
-```
-
-### 8. Rularea metricilor (`evaluate.py`):
-
-Terminal 1:
-
-```powershell
-uvicorn app.main:app --reload
-```
-
-Terminal 2:
-
-```powershell
-python -m Lectia5\Tema3\evaluation\evaluate.py
-```
+- [Plan_rezolvare.md](Plan_rezolvare.md)
