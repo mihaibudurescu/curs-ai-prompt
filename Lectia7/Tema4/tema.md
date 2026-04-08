@@ -1,0 +1,1 @@
+## Genereaza 1 videoclip cu ajutorul lui Veo pentru o idee a ta (în temă să fie evidente prompt-urile pe care le-ai folosit)
